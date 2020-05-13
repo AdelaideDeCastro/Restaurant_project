@@ -1,0 +1,74 @@
+/**
+ * General
+ */
+$enable-rounded: false;
+
+/*
+	Fonts
+*/
+$font-weight-bold: 600;
+$font-family-sans-serif: Rufina, Georgia, serif;
+$font-size-base: 1rem;
+$line-height-base: 1.5;
+
+/**
+  Headings
+ */
+$headings-font-weight: $font-weight-bold;
+$h1-font-size: $font-size-base * 2.5;
+$h2-font-size: $font-size-base * 1.5;
+$h3-font-size: $font-size-base * 1.25;
+$headings-margin-bottom: 1em;
+
+
+$container-max-widths: (
+        xl: 1230px
+);
+
+// Color system
+$hazel: #efe7de;
+$red: #631a2d;
+$gray: #CECECE;
+$green: #3EAD47;
+
+$primary: $red;
+$success: $green;
+$secondary: $hazel;
+$white: #FFF;
+
+$theme-colors: (
+        'red'   : $red,
+        'green' : $green,
+        'white' : $white,
+        'black' : #000
+);
+
+$body-bg: $white;
+$body-color: #000;
+
+// Links
+$link-color: $primary;
+$link-hover-color: $primary;
+$link-decoration: none;
+$link-hover-decoration: none;
+
+/*
+	Forms
+ */
+$btn-font-weight: 800;
+$btn-font-size: 1.4rem;
+$btn-padding-y: 0.613rem;
+$btn-padding-x: 1.8rem;
+$btn-padding-y-lg: 17px;
+$btn-padding-x-lg: 30px;
+$btn-box-shadow: none;
+$border-width: 3px;
+$custom-control-indicator-size: 1.67rem;
+$input-border-color: $secondary;
+
+/*
+	Sizes
+ */
+$sizes: (
+        40 : 40%,
+);
