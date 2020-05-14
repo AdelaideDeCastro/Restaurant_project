@@ -1,0 +1,30 @@
+{
+  "name": "bacco",
+  "version": "1.0.0",
+  "description": "italian restaurant",
+  "main": "index.js",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.5.0",
+    "lightbox2": "^2.11.1",
+    "popper.js": "^1.16.1",
+    "slick-carousel": "^1.8.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss": "node-sass -o assets/css assets/scss/main.scss"
+  },
+  "keywords": [
+    "italian",
+    "restaurant",
+    "pasta",
+    "den",
+    "haag",
+    "wordpress",
+    "mario"
+  ],
+  "author": "Adelaide De Castro",
+  "license": "ISC"
+}
