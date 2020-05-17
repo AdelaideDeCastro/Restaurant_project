@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<main>
+<!-- <main>
     <div class="container-fluid bg-img bg-img-header d-flex justify-content-center" style="background-image: url('img/MG_69801-780x300_c.jpg');">
         <div class="text-center align-self-center">
             <h1 class="text-primary">Bacco Perbacco</h1>
@@ -76,6 +76,32 @@
             </div>
         </div>
     </div>
-</main>
+</main> -->
+
+<h1>Test</h1>
+<?php
+if ( have_posts() ) :
+    while ( have_posts() ) :
+        the_post(); ?>
+        <div class="page-content">
+            <div class="container">
+
+                <?php
+                echo '<h1>' . get_the_title() . '</h1>';
+                the_content();
+
+                ?>
+
+
+            </div>
+
+        </div>
+    <?php
+    endwhile;
+
+    wp_reset_query();
+
+endif;
+?>
 
 <?php get_footer(); ?>

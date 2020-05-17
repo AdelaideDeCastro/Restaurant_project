@@ -23,9 +23,9 @@ wp_body_open();
         <div class="d-flex py-2">
             <div class="logo mr-auto text-center">
                 <a class="navbar-brand" href="<?php echo get_home_url(); ?>">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/logo.png" class="logo" alt="Bacco Perbacco logo">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/logo.png" class="logo" alt="<?php echo get_bloginfo( 'name', 'raw' ) ?>">
                 </a>
-                <h3 class="text-primary">Bacco Perbacco</h3>
+                <h3 class="text-primary"><?php echo get_bloginfo( 'name', 'raw' ) ?></h3>
             </div>
             <div class="align-self-center">
                 <ul class="nav">
