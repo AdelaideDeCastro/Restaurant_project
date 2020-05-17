@@ -45,58 +45,67 @@ class vcHeaderBackgroundBlock extends WPBakeryShortCode {
 				[
 					'type'			=> 'textarea_html',
 					'param_name'	=> 'content',
-					'heading'		=> 'Description'
+					'heading'		=> 'Description',
+					'class'			=> 'PIPPO',
 				],
 				[
 					'type'			=> 'vc_link',
-					'param_name'	=> 'btn_reservation',
+					'param_name'	=> 'reservation_url',
 					'heading'		=> 'Reservation button',
+					'class'			=> 'd-none',
 				],
 			],
 		] );
+
+		// if ( $type_content == 'text' ) {
+		// 	$content['class'] = 'd-block';
+		// } elseif ( $type_content == 'link' ) {
+		// 	$content['class'] = 'd-block';
+		// } else {
+		// 	echo "Nessuna scelta";
+		// }
 
 	}
 	
 
 	//Element html
-	public function vc_header_background_block_html( $atts ) {
+	public function vc_header_background_block_html( $atts, $const ) {
 
 		ob_start();
 
-		extract( shortcode_atts( [
-			'header_bg_image'	=> '',
-			'type_content'		=> '',
-			'content'			=> '',
-			'btn_reservation'	=> ''
-		], $atts ) );
+		// extract( shortcode_atts( [
+		// 	'header_bg_image'	=> '',
+		// 	'type_content'		=> '',
+		// 	'content'			=> '',
+		// 	'btn_reservation'	=> ''
+		// ], $atts ) );
 
-		$header_img = wp_get_attachment_image_src( $header_bg_image, 'full' );
+		$header_img = wp_get_attachment_image_src( $atts['header_bg_image'], 'full' );
 
+		$btn_link = vc_build_link( $atts['reservation_url'] );
 
-		 // if ( !empty( $header_img ) ) { 
+		if ( !empty( $header_img[0] ) ) { ?>
 
-		echo '<pre>';
+		 	<div class="container-fluid bg-img bg-img-header d-flex justify-content-center" style="background-image: url( ' <?= $header_img[0] ?> ' );">
+		        <div class="text-center align-self-center">
 
-		print_r($atts);
+		        	<?php if ( !empty( $const ) || !empty( $atts[$btn_reservation] ) ) { ?>
+		        	
+		            	<div><?= $const; ?></div>
 
-		echo '</pre>';
+		            	<div class="link-reservatin d-flex justify-content-center align-items-center">
+	            				<a href="<?= $btn_link['url']; ?>" title="<?= $btn_link['title']; ?>" target="<?= $btn_link['target']; ?>" class="">Reserveren</a>
+	            				<div class="overlapping-layer position-absolute bg-white"></div>
+	        			</div>
 
+		            <?php } ?>
+		        </div>
+		    </div>
 
-		 	?>
-		            <!-- <div class="bg-image" style="background-image: url( ' <?= $header_img[0] ?> ' ); height: 200px;"></div>
-		            <div class="header-content">
-		            	<div class="zeus">
+		<?php
 
-		            		<h1>Contenuto:</h1>
-
-		                	<?php echo $content; ?>
-		                </div>
-
-		            </div> -->
-		            <?php
-		        // } else {
-		        	// echo "Non ce sto a capi' una ceppa";
-		        // }
+		}
+		       
 
 		$html = ob_get_clean();
 

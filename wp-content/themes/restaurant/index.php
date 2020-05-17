@@ -78,22 +78,18 @@
     </div>
 </main> -->
 
-<h1>Test</h1>
+<!-- <h1>Test</h1> -->
 <?php
 if ( have_posts() ) :
     while ( have_posts() ) :
         the_post(); ?>
         <div class="page-content">
-            <div class="container">
 
-                <?php
-                echo '<h1>' . get_the_title() . '</h1>';
-                the_content();
+            <?php
+            
+            the_content();
 
-                ?>
-
-
-            </div>
+            ?>
 
         </div>
     <?php
