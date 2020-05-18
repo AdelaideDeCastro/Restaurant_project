@@ -84,13 +84,20 @@ if ( have_posts() ) :
     while ( have_posts() ) :
         the_post(); ?>
         <div class="page-content">
+            <div class="container">
 
             <?php
+
+            // if ( !empty( 'vc_header_background_block' ) ) {
+            //     echo "</div>";
+                
+            // }
             
             the_content();
 
             ?>
-
+            
+            </div>
         </div>
     <?php
     endwhile;

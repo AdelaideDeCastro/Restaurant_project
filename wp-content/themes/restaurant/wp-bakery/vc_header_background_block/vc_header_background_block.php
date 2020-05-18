@@ -1,5 +1,7 @@
 <?php
-class vcHeaderBackgroundBlock extends WPBakeryShortCode {
+
+class vcHeaderBackgroundBlock extends WPBakeryShortCode
+{
 
 	//Initialize Component
 	function __construct() {
@@ -15,7 +17,6 @@ class vcHeaderBackgroundBlock extends WPBakeryShortCode {
 		 if ( !defined( 'WPB_VC_VERSION' ) ) {
             exit();
             return;
-
         }
 
 		vc_map( [
@@ -46,27 +47,24 @@ class vcHeaderBackgroundBlock extends WPBakeryShortCode {
 					'type'			=> 'textarea_html',
 					'param_name'	=> 'content',
 					'heading'		=> 'Description',
-					'class'			=> 'PIPPO',
+					'dependency'	=> [
+						'element'	=> 'type_content',
+						'value'		=> 'text',
+					],
 				],
 				[
 					'type'			=> 'vc_link',
 					'param_name'	=> 'reservation_url',
 					'heading'		=> 'Reservation button',
-					'class'			=> 'd-none',
+					'dependency'	=> [
+						'element'	=> 'type_content',
+						'value'		=> 'link',
+					]
 				],
 			],
 		] );
 
-		// if ( $type_content == 'text' ) {
-		// 	$content['class'] = 'd-block';
-		// } elseif ( $type_content == 'link' ) {
-		// 	$content['class'] = 'd-block';
-		// } else {
-		// 	echo "Nessuna scelta";
-		// }
-
 	}
-	
 
 	//Element html
 	public function vc_header_background_block_html( $atts, $const ) {
@@ -82,23 +80,34 @@ class vcHeaderBackgroundBlock extends WPBakeryShortCode {
 
 		$header_img = wp_get_attachment_image_src( $atts['header_bg_image'], 'full' );
 
-		$btn_link = vc_build_link( $atts['reservation_url'] );
-
 		if ( !empty( $header_img[0] ) ) { ?>
+
 
 		 	<div class="container-fluid bg-img bg-img-header d-flex justify-content-center" style="background-image: url( ' <?= $header_img[0] ?> ' );">
 		        <div class="text-center align-self-center">
 
-		        	<?php if ( !empty( $const ) || !empty( $atts[$btn_reservation] ) ) { ?>
+		        	<?php if ( $atts['type_content'] == 'text' && !empty( $const ) ) { ?>
 		        	
-		            	<div><?= $const; ?></div>
+		            	<div class="text-primary"><?= $const; ?></div>
 
-		            	<div class="link-reservatin d-flex justify-content-center align-items-center">
-	            				<a href="<?= $btn_link['url']; ?>" title="<?= $btn_link['title']; ?>" target="<?= $btn_link['target']; ?>" class="">Reserveren</a>
-	            				<div class="overlapping-layer position-absolute bg-white"></div>
-	        			</div>
+		            <?php }
 
-		            <?php } ?>
+
+		            if ( $atts['type_content'] == 'link' ) {
+
+						$btn_link = vc_build_link( $atts['reservation_url'] );
+
+		            	if ( empty( $btn_link) ) { ?>
+
+			            	<div class="link-reservatin d-flex justify-content-center align-items-center">
+		            				<a href="<?= $btn_link['url']; ?>" title="<?= $btn_link['title']; ?>" target="<?= $btn_link['target']; ?>" class=""><?= $btn_link['title']; ?></a>
+		            				<div class="overlapping-layer position-absolute bg-white"></div>
+		        			</div>
+
+		            <?php 
+		        		} 
+
+		        	} ?>
 		        </div>
 		    </div>
 
