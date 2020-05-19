@@ -4,7 +4,7 @@ Plugin Name: ACF-VC Integrator
 Plugin URI:https://wordpress.org/plugins/acf-vc-integrator/
 Description: ACF VC Integrator plugin is the easiest way to output your Advanced Custom Posttype fields in a WPBakery Page Builder (Visual Composer) Grid.
 Author: Frederik Rosendahl-Kaa
-Version: 1.7.4
+Version: 1.8.1
 Author URI: https://frederikrosendahlkaa.dk/
 Text Domain: acf-vc-integrator
 Domain Path: /languages
@@ -31,16 +31,24 @@ function acfvc_add_default_options() {
 				"date_time_format" => "wp_default",
 				"time_format" => "wp_default",
 			),
-		"gallery" => Array (
-				"columns" => 3,
-				"image_size" => "thumbnail",
-				"order_by" => "ID",
-				"order" => "ASC",
-				"itemtag" => "",
-				"icontag" => "",
-				"captiontag" => "",
-				"link" => "none",
-			),
+			"gallery" => Array (
+					"columns" => 3,
+					"image_size" => "thumbnail",
+					"order_by" => "ID",
+					"order" => "ASC",
+					"itemtag" => "",
+					"icontag" => "",
+					"captiontag" => "",
+					"link" => "none",
+				),
+			"gooogle_map" => Array (
+					"placecard" => 1,
+					"zoom" => 1,
+					"type" => 1,
+					"fullscreen" => 0,
+					"street_view" => 0,
+					"scale" => 0
+				),
 	);
 	if (!get_option('acfvc_default')) {
 		add_option( "acfvc_default", $value );
@@ -48,10 +56,10 @@ function acfvc_add_default_options() {
 }
 function acfvc_add_version_number() {
 	if (!get_option('acfvc_version')) {
-		add_option( "acfvc_version", "1.7.3" );
+		add_option( "acfvc_version", "1.8.1" );
 	} else {
-		if (get_option('acfvc_version') != "1.7.3") {
-			update_option( "acfvc_version", "1.7.3" );
+		if (get_option('acfvc_version') != "1.8.1") {
+			update_option( "acfvc_version", "1.8.1" );
 		}
 	}
 }

@@ -7,8 +7,7 @@ function acf_vc_integrator_admin() {
         <div id="icon-options-general" class="icon32"></div>
         <h1>ACF-VC Integrator</h1>
         <h2>ACF VC Integrator plugin is the easiest way to output your Advanced Custom Post type fields in a WPBakery Page Builder (Visual Composer) Grid.</h2>
-        <!-- <p>The plugin is created by <a title="Nordic Custom Made" href="https://www.nordiccustommade.dk/" target="_blank">nordiccustommade.dk</a></p> -->
-
+ 
         <?php
             $active_tab = "default-settings";
             if(isset($_GET["tab"])) {
@@ -28,16 +27,13 @@ function acf_vc_integrator_admin() {
                 settings_fields("acfvc_content");
                 do_settings_sections("display_acfvc_content");
                 do_settings_sections("display_acfvc_gallery");
+                do_settings_sections("display_acfvc_google_map");
                 if(!isset($_GET["tab"]) OR $_GET["tab"] == "default-settings") {
                     submit_button();
                 }
 
             ?>
         </form>
-        <!-- <br/><p>Roadmap:<br/>
-        Do you have any suggestions or requests, please don’t hesitate to connect with us on <a href="mailto:support@acf-vc.com" title="Contact Us">support@acf-vc.com</a></p>
-        <a href="https://www.nordiccustommade.dk/" target="_blank"><img height="100px" src="<?php //echo plugin_dir_url(dirname(__FILE__)); ?>images/ncm-logo.png" alt="Created by Nordic Custom Made ApS" title="Nordic Custom Made ApS" /></a>
-        <a href="https://acf-vc.com/" target="_blank"><img height="100px" src="<?php //echo plugin_dir_url(dirname(__FILE__)); ?>images/acf-vc-logo.png" alt="ACF-VC Integrator Website" title="ACF-VC Integrator" /></a> -->
     </div>
     <?php
 }
@@ -51,6 +47,7 @@ function acfvc_display_options() {
 
             add_settings_section("acfvc_content", __("Default settings", "acf-vc-integrator"), "display_acfvc_default_settings_content", "display_acfvc_content");
             add_settings_section("acfvc_content", __("Gallery settings", "acf-vc-integrator"), "display_acfvc_default_settings_gallery", "display_acfvc_gallery");
+            add_settings_section("acfvc_content", __("Goolge map settings", "acf-vc-integrator"), "display_acfvc_default_settings_google_map", "display_acfvc_google_map");
 
             /*default settings*/
             add_settings_field("acfvc_default_show_label", __("Show label", "acf-vc-integrator"), "acfvc_display_show_label_option", "display_acfvc_content", "acfvc_content");
@@ -79,6 +76,14 @@ function acfvc_display_options() {
             add_settings_field("acfvc_default_gallery_captiontag", __("Captiontag", "acf-vc-integrator"), "acfvc_display_gallery_captiontag_option", "display_acfvc_gallery", "acfvc_content");
             add_settings_field("acfvc_default_gallery_link", __("Link", "acf-vc-integrator"), "acfvc_display_gallery_link_option", "display_acfvc_gallery", "acfvc_content");
 
+            /*Google map settings */
+            add_settings_field("acfvc_default_google_map_placecard", __("Placecard", "acf-vc-integrator"), "acfvc_display_google_map_placecard_option", "display_acfvc_google_map", "acfvc_content");
+            add_settings_field("acfvc_default_google_map_zoom", __("Zoom control", "acf-vc-integrator"), "acfvc_display_google_map_zoom_option", "display_acfvc_google_map", "acfvc_content");
+            add_settings_field("acfvc_default_google_map_type", __("Type control", "acf-vc-integrator"), "acfvc_display_google_map_type_option", "display_acfvc_google_map", "acfvc_content");
+            add_settings_field("acfvc_default_google_map_fullscreen", __("Fullscreen control", "acf-vc-integrator"), "acfvc_display_google_map_fullscreen_option", "display_acfvc_google_map", "acfvc_content");
+            add_settings_field("acfvc_default_google_map_street_view", __("Street view", "acf-vc-integrator"), "acfvc_display_google_map_street_view_option", "display_acfvc_google_map", "acfvc_content");
+            add_settings_field("acfvc_default_google_map_scale", __("Show scale", "acf-vc-integrator"), "acfvc_display_google_map_scale_option", "display_acfvc_google_map", "acfvc_content");
+
             register_setting("acfvc_content", "acfvc_default", "acfvc_validate_option_fields");
         } elseif ($_GET["tab"] == "changelog") {
             add_settings_section("acfvc_content", "Changelog", "display_acfvc_changelog_content", "display_acfvc_content");
@@ -98,6 +103,7 @@ function display_acfvc_default_settings_content() {
 }
 /*content for gallery section*/
 function display_acfvc_default_settings_gallery() {}
+function display_acfvc_default_settings_google_map() {}
 
 /*General element settings - show label*/
 function acfvc_display_show_label_option() {
@@ -382,6 +388,132 @@ function acfvc_display_gallery_link_option() {
         <select name="acfvc_default[gallery][link]" id="acfvc_gallery_columns">
             <option <?php if($option_value == 'none') echo "selected"; ?> value="none"><?php _e("None", "acf-vc-integrator") ?></option>
             <option <?php if($option_value == 'file') echo "selected"; ?> value="file"><?php _e("File", "acf-vc-integrator") ?></option>
+        </select>
+    <?php
+}
+
+/*Google map placecard settings */
+function acfvc_display_google_map_placecard_option() {
+    $acfvc_option = get_option('acfvc_default');
+    $option_value = "";
+    if ($acfvc_option) {
+        if ( array_key_exists( 'google_map', $acfvc_option ) ) {
+            if (array_key_exists('placecard',$acfvc_option['google_map'])) {
+                $option_value = $acfvc_option['google_map']['placecard'];
+            }
+        } else {
+            $option_value = 1;
+        }
+    }
+    ?>
+        <select name="acfvc_default[google_map][placecard]" id="acfvc_google_map_columns">
+            <option <?php if($option_value == 0) echo "selected"; ?> value=0><?php _e("No", "acf-vc-integrator") ?></option>
+            <option <?php if($option_value == 1) echo "selected"; ?> value=1><?php _e("Yes", "acf-vc-integrator") ?></option>
+        </select>
+    <?php
+}
+
+/*Google map zoom settings */
+function acfvc_display_google_map_zoom_option() {
+    $acfvc_option = get_option('acfvc_default');
+    $option_value = "";
+    if ($acfvc_option) {
+        if ( array_key_exists( 'google_map', $acfvc_option ) ) {
+            if (array_key_exists('zoom',$acfvc_option['google_map'])) {
+                $option_value = $acfvc_option['google_map']['zoom'];
+            }
+        } else {
+            $option_value = 1;
+        }
+    }
+    ?>
+        <select name="acfvc_default[google_map][zoom]" id="acfvc_google_map_columns">
+            <option <?php if($option_value == 0) echo "selected"; ?> value=0><?php _e("No", "acf-vc-integrator") ?></option>
+            <option <?php if($option_value == 1) echo "selected"; ?> value=1><?php _e("Yes", "acf-vc-integrator") ?></option>
+        </select>
+    <?php
+}
+
+/*Google map type settings */
+function acfvc_display_google_map_type_option() {
+    $acfvc_option = get_option('acfvc_default');
+    $option_value = "";
+    if ($acfvc_option) {
+        if ( array_key_exists( 'google_map', $acfvc_option ) ) {
+            if (array_key_exists('type',$acfvc_option['google_map'])) {
+                $option_value = $acfvc_option['google_map']['type'];
+            }
+        } else {
+            $option_value = 1;
+        }
+    }
+    ?>
+        <select name="acfvc_default[google_map][type]" id="acfvc_google_map_columns">
+            <option <?php if($option_value == 0) echo "selected"; ?> value=0><?php _e("No", "acf-vc-integrator") ?></option>
+            <option <?php if($option_value == 1) echo "selected"; ?> value=1><?php _e("Yes", "acf-vc-integrator") ?></option>
+        </select>
+    <?php
+}
+
+/*Google map fullscreen settings */
+function acfvc_display_google_map_fullscreen_option() {
+    $acfvc_option = get_option('acfvc_default');
+    $option_value = "";
+    if ($acfvc_option) {
+        if ( array_key_exists( 'google_map', $acfvc_option ) ) {
+            if (array_key_exists('fullscreen',$acfvc_option['google_map'])) {
+                $option_value = $acfvc_option['google_map']['fullscreen'];
+            }
+        } else {
+            $option_value = 0;
+        }
+    }
+    ?>
+        <select name="acfvc_default[google_map][fullscreen]" id="acfvc_google_map_columns">
+            <option <?php if($option_value == 0) echo "selected"; ?> value=0><?php _e("No", "acf-vc-integrator") ?></option>
+            <option <?php if($option_value == 1) echo "selected"; ?> value=1><?php _e("Yes", "acf-vc-integrator") ?></option>
+        </select>
+    <?php
+}
+
+/*Google map street view settings */
+function acfvc_display_google_map_street_view_option() {
+    $acfvc_option = get_option('acfvc_default');
+    $option_value = "";
+    if ($acfvc_option) {
+        if ( array_key_exists( 'google_map', $acfvc_option ) ) {
+            if (array_key_exists('street_view',$acfvc_option['google_map'])) {
+                $option_value = $acfvc_option['google_map']['street_view'];
+            }
+        } else {
+            $option_value = 0;
+        }
+    }
+    ?>
+        <select name="acfvc_default[google_map][street_view]" id="acfvc_google_map_columns">
+            <option <?php if($option_value == 0) echo "selected"; ?> value=0><?php _e("No", "acf-vc-integrator") ?></option>
+            <option <?php if($option_value == 1) echo "selected"; ?> value=1><?php _e("Yes", "acf-vc-integrator") ?></option>
+        </select>
+    <?php
+}
+
+/*Google map scale settings */
+function acfvc_display_google_map_scale_option() {
+    $acfvc_option = get_option('acfvc_default');
+    $option_value = "";
+    if ($acfvc_option) {
+        if ( array_key_exists( 'google_map', $acfvc_option ) ) {
+            if (array_key_exists('scale',$acfvc_option['google_map'])) {
+                $option_value = $acfvc_option['google_map']['scale'];
+            }
+        } else {
+            $option_value = 0;
+        }
+    }
+    ?>
+        <select name="acfvc_default[google_map][scale]" id="acfvc_google_map_columns">
+            <option <?php if($option_value == 0) echo "selected"; ?> value=0><?php _e("No", "acf-vc-integrator") ?></option>
+            <option <?php if($option_value == 1) echo "selected"; ?> value=1><?php _e("Yes", "acf-vc-integrator") ?></option>
         </select>
     <?php
 }

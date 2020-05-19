@@ -13,6 +13,7 @@ class Acf_vc_integrator_Shortcode extends WPBakeryShortCode {
         /**
          * @var string $el_class
          * @var string $show_label
+         * @var string $custom_label
          * @var string $align
          * @var string $get_field_data_from
          * @var string $field_group
@@ -30,12 +31,24 @@ class Acf_vc_integrator_Shortcode extends WPBakeryShortCode {
          * @var string $gallery_captiontag_dropdown
          * @var string $gallery_captiontag
          * @var string $gallery_link
+         * @var string $file_link_text
+         * @var string $file_prepend_text
+         * @var string $file_link_traget
+         * @var string $gm_show_placecard
+         * @var string $gm_map_type_control
+         * @var string $gm_fullscreen_control
+         * @var string $gm_street_view_control
+         * @var string $gm_zoom_control
+         * @var string $gm_scale
+         * @var string $gm_map_height
+         * @var string $gm_zoom_level
          */
         extract( shortcode_atts( array(
             'el_class' => '',
             'get_field_data_from' => '',
             'field_group' => '',
             'show_label' => '',
+            'custom_label' => '',
             'align' => '',
             'link_text' => '',
             'prepend_append' => '',
@@ -51,6 +64,17 @@ class Acf_vc_integrator_Shortcode extends WPBakeryShortCode {
             'gallery_captiontag_dropdown' => '',
             'gallery_captiontag' => '',
             'gallery_link' => '',
+            'file_link_text' => '',
+            'file_prepend_text' => '',
+            'file_link_target' => '',
+            'gm_show_placecard' => '',
+            'gm_map_type_control' => '',
+            'gm_fullscreen_control' => '',
+            'gm_street_view_control' => '',
+            'gm_zoom_control' => '',
+            'gm_scale' => '',
+            'gm_map_height' => '',
+            'gm_zoom_level' => '',
         ), $atts ) );
 
         $acf_version = get_acf_version_number();
@@ -124,6 +148,47 @@ class Acf_vc_integrator_Shortcode extends WPBakeryShortCode {
         }
         $gallery_options["link"] = $gallery_link;
 
+        if ( empty( $gm_map_height ) ) {
+            $google_map['map_height'] = '400px';
+        } else {
+            $google_map['map_height'] = $gm_map_height;
+        }
+        if ( empty( $gm_zoom_level ) ) {
+            $google_map['zoom_level'] = '14';
+        } else {
+            $google_map['zoom_level'] = $gm_zoom_level;
+        }
+        if ( empty( $gm_show_placecard ) AND !is_numeric( $gm_show_placecard ) ) {
+            $google_map['placecard'] = 'default';
+        } else {
+            $google_map['placecard'] = $gm_show_placecard;
+        }
+        if ( empty( $gm_map_type_control ) AND !is_numeric( $gm_map_type_control ) ) {
+            $google_map['type'] = 'default';
+        } else {
+            $google_map['type'] = $gm_map_type_control;
+        }
+        if ( empty( $gm_fullscreen_control ) AND !is_numeric( $gm_fullscreen_control ) ) {
+            $google_map['fullscreen'] = 'default';
+        } else {
+            $google_map['fullscreen'] = $gm_fullscreen_control;
+        }
+        if ( empty( $gm_street_view_control ) AND !is_numeric( $gm_street_view_control ) ) {
+            $google_map['street_view'] = 'default';
+        } else {
+            $google_map['street_view'] = $gm_street_view_control;
+        }
+        if ( empty( $gm_zoom_control ) AND !is_numeric( $gm_zoom_control ) ) {
+            $google_map['zoom'] = 'default';
+        } else {
+            $google_map['zoom'] = $gm_zoom_control;
+        }
+        if ( empty( $gm_scale ) AND !is_numeric( $gm_scale ) ) {
+            $google_map['scale'] = 'default';
+        } else {
+            $google_map['scale'] = $gm_scale;
+        }
+
         $args = array (
             "field_key" => $field_key,
             "clone_field_key" => $clone_field_key,
@@ -131,12 +196,24 @@ class Acf_vc_integrator_Shortcode extends WPBakeryShortCode {
             "link_text" => $link_text,
             'prepend_append' => $prepend_append,
             "gallery_options" => $gallery_options,
+            "google_map" => $google_map
 
         );
 
         if ( $repeater_header ) {
             $args['repeater']['header'] = $repeater_header; 
         }
+
+        if ( $file_link_text ) {
+            $args['file']['file_link_text'] = $file_link_text; 
+        }
+        if ( $file_prepend_text ) {
+            $args['file']['file_prepend_text'] = $file_prepend_text;
+        }
+        if ( $file_link_target ) {
+            $args['file']['file_link_target'] = $file_link_target;
+        }
+        
 
         $acf_vc_helper = new acf_vc_helper();
         $output_empty = false;
@@ -216,7 +293,13 @@ class Acf_vc_integrator_Shortcode extends WPBakeryShortCode {
             } else {
                 $output = '<span class="sw-acf-field-label label-'.$field_key.'">'.$custom_field["label"].':</span> '.$output;
             }
-        } elseif ( 'yes_no' === $show_label AND  $output_empty === true) {
+        } elseif ( 'custom_label' === $show_label OR 'custom_label_yes_no' === $show_label AND $output_empty === false AND !empty( $custom_label ) ) {
+            if(!isset($output)) {
+                $output = '<span class="sw-acf-field-label label-'.$field_key.'">'.$custom_label.'</span> '.$custom_field["value"];
+            } else {
+                $output = '<span class="sw-acf-field-label label-'.$field_key.'">'.$custom_label.'</span> '.$output;
+            }
+        } elseif ( 'yes_no' === $show_label OR 'custom_label_yes_no' === $show_label AND  $output_empty === true) {
             $output = "";
         } else {
             if(!isset($output) OR empty($output)) $output = $custom_field["value"];

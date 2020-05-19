@@ -174,33 +174,62 @@ if ( ! class_exists( 'acf_vc_helper' ) ) {
 	  $file_details = $field["value"];
 	  $acf_version = $args["acf_version"];
 	  $link_text = $args["link_text"];
+	  $file_prepend_text = "";
+	  $file_link_target = "_self";
+
+		if ( array_key_exists( 'file', $args ) ) {
+			if ( array_key_exists( 'file_prepend_text', $args["file"] ) ) {
+				if ( !empty( $args["file"]["file_prepend_text"] ) ) {
+					$file_prepend_text = $args["file"]["file_prepend_text"]." ";
+				}
+			}
+			if ( array_key_exists( 'file_link_target', $args["file"] ) ) {
+				if ( $args["file"]["file_link_target"] == "_blank" ) {
+					$file_link_target = "_blank";
+				}
+			}			
+		}	  
+
 	  if($acf_version >= 5) {
 		if($field["return_format"] == "array" ) {
 		  if(isset($file_details["url"])) {
-			$output = '<a title="Download '.$file_details["title"].'" href="'.$file_details["url"].'">'.$link_text.'</a>';
+
+			if ( array_key_exists( 'file', $args ) ) {
+				if ( array_key_exists( 'file_link_text', $args["file"] ) ) {
+				
+					if ( $args["file"]["file_link_text"] == "title" ) {
+						$link_text = $file_details["title"];
+					} elseif ( $args["file"]["file_link_text"] == "filename" ) {
+						$link_text = $file_details["filename"];
+					}
+
+				}
+			}
+
+			$output = '<a target="'.$file_link_target.'" title="'.$file_prepend_text.$link_text.'" href="'.$file_details["url"].'">'.$file_prepend_text.$link_text.'</a>';
 		  } else {
 			$output = 'data-mismatch';
 		  }
 		} elseif ($field["return_format"]=="url") {
-		  $output = '<a title="Download" href="'.$file_details.'">'.$link_text.'</a>';
+		  $output = '<a target="'.$file_link_target.'" title="'.$file_prepend_text.'" href="'.$file_details.'">'.$file_prepend_text.$link_text.'</a>';
 		} elseif ($field["return_format"]=="id") {
 		  $file_details = wp_get_attachment_url($file_details);
-		  $output = '<a title="Download" href="'.$file_details.'">'.$link_text.'</a>';
+		  $output = '<a target="'.$file_link_target.'" title="'.$file_prepend_text.'" href="'.$file_details.'">'.$link_text.'</a>';
 		} else {
 		  $output = $field["value"];
 		}
 	  } else {
 		if($field["save_format"] == "object" ) {
 			if(isset($file_details["url"])) {
-				$output = '<a title="Download '.$file_details["title"].'" href="'.$file_details["url"].'">'.$link_text.'</a>';
+				$output = '<a target="'.$file_link_target.'" title="'.$file_prepend_text.$link_text.'" href="'.$file_details["url"].'">'.$file_prepend_text.$link_text.'</a>';
 			} else {
 				$output = 'data-mismatch';
 			}
 		} elseif ($field["save_format"]=="url") {
-		  $output = '<a title="Download" href="'.$file_details.'">'.$link_text.'</a>';
+		  $output = '<a target="'.$file_link_target.'" title="'.$file_prepend_text.'" href="'.$file_details.'">'.$link_text.'</a>';
 		} elseif ($field["save_format"]=="id") {
 		  $file_details = wp_get_attachment_url($file_details);
-		  $output = '<a title="Download" href="'.$file_details.'">'.$link_text.'</a>';
+		  $output = '<a target="'.$file_link_target.'" title="'.$file_prepend_text.'" href="'.$file_details.'">'.$link_text.'</a>';
 		} else {
 		  $output = $field["value"];
 		}
@@ -327,9 +356,172 @@ if ( ! class_exists( 'acf_vc_helper' ) ) {
 	  }
 
 	public function google_map($field, $args, $post_id) {
-	  $map_details = $field["value"];
-	  $output = '<iframe width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q='.$map_details["lat"].','.$map_details["lng"].'&hl=es;z=14&amp;output=embed"></iframe>';
-	  return apply_filters('acfvc_google_map',$output,$field,$post_id);
+		$map_details = $field["value"];
+		
+		$acfvc_option = get_option('acfvc_default');
+		
+		if ( !array_key_exists( 'google_map', $args ) ) {
+			
+			$google_map_options["map_height"] = '400px';
+			$google_map_options["zoom_level"] = '14';
+			$google_map_options["placecard"] = 1;
+			$google_map_options["zoom"] = 1;
+			$google_map_options["type"] = 1;
+			$google_map_options["fullscreen"] = 0;
+			$google_map_options["street_view"] = 0;
+			$google_map_options["scale"] = 0;
+
+		} else {
+			$google_map_options = $args["google_map"];
+		}
+
+		if  ( $google_map_options["placecard"] === 'default' ) {
+			if ( $acfvc_option ) {
+				if ( array_key_exists( 'google_map', $acfvc_option ) ) {
+					if ( array_key_exists( 'placecard', $acfvc_option['google_map'] ) ) {
+						$google_map_options["placecard"] = $acfvc_option['google_map']['placecard'];
+					}
+				} else {
+					$google_map_options["placecard"] = 1;					
+				}
+			}
+		}
+		if  ( $google_map_options["zoom"] === 'default' ) {
+			if ( $acfvc_option ) {
+				if ( array_key_exists( 'google_map', $acfvc_option ) ) {
+					if ( array_key_exists( 'zoom', $acfvc_option['google_map'] ) ) {
+						$google_map_options["zoom"] = $acfvc_option['google_map']['zoom'];
+					}
+				} else {
+					$google_map_options["zoom"] = 1;					
+				}
+			}
+		}	
+		if  ( $google_map_options["type"] === 'default' ) {
+			if ( $acfvc_option ) {
+				if ( array_key_exists( 'google_map', $acfvc_option ) ) {
+					if ( array_key_exists( 'type', $acfvc_option['google_map'] ) ) {
+						$google_map_options["type"] = $acfvc_option['google_map']['type'];
+					}
+				} else {
+					$google_map_options["type"] = 1;					
+				}
+			}
+		}	
+		if  ( $google_map_options["fullscreen"] === 'default' ) {
+			if ( $acfvc_option ) {
+				if ( array_key_exists( 'google_map', $acfvc_option ) ) {
+					if ( array_key_exists( 'fullscreen', $acfvc_option['google_map'] ) ) {
+						$google_map_options["fullscreen"] = $acfvc_option['google_map']['fullscreen'];
+					}
+				} else {
+					$google_map_options["fullscreen"] = 0;					
+				}
+			}
+		}		
+		if  ( $google_map_options["street_view"] === 'default' ) {
+			if ( $acfvc_option ) {
+				if ( array_key_exists( 'google_map', $acfvc_option ) ) {
+					if ( array_key_exists( 'street_view', $acfvc_option['google_map'] ) ) {
+						$google_map_options["street_view"] = $acfvc_option['google_map']['street_view'];
+					}
+				} else {
+					$google_map_options["street_view"] = 0;					
+				}
+			}
+		}		
+		if  ( $google_map_options["scale"] === 'default' ) {
+			if ( $acfvc_option ) {
+				if ( array_key_exists( 'google_map', $acfvc_option ) ) {
+					if ( array_key_exists( 'scale', $acfvc_option['google_map'] ) ) {
+						$google_map_options["scale"] = $acfvc_option['google_map']['scale'];
+					}
+				} else {
+					$google_map_options["scale"] = 0;					
+				}
+			}
+		}		
+
+		$google_api = array();
+		$google_api_key = "";
+		$map_region = "";
+		$gadress_title = "";
+		$gadress = $map_details["lat"].', '.$map_details["lng"];
+		$move_type_control = "";
+		$output = "";
+
+		if ( $field["value"]["address"] ) {
+			$gadress = $field["value"]["address"];
+			$gadress_explode = explode( ',', $gadress );
+			$gadress_title = $gadress_explode[0];
+		}
+	
+		$google_api = array(
+			'key'		=> acf_get_setting('google_api_key'),
+		);
+
+		$google_api = apply_filters('acf/fields/google_map/api', $google_api);
+
+		if ( $google_api["key"] ) {
+			$google_api_key = $google_api["key"];
+		}
+
+		if ( get_locale() ) {
+			$local = explode( '_', get_locale() );
+			$map_language = $local[0];
+			if ( array_key_exists("1",$local) ) {
+				$map_language .= "&region=".$local[1];
+			}
+			// $map_region = "";
+			
+		}
+		
+		if ( $google_map_options["placecard"] ) {
+			$output .= '<div class="map-container">
+			<div class="placeDiv">
+				<div class="placecard__container">
+				<div class="placecard__left">
+					<p class="placecard__business-name">'.$gadress_title.'</p>
+					<p class="placecard__info">'.$gadress.'</p>
+					<a class="placecard__view-large" target="_blank" href="https://www.google.com/maps?ll='.$map_details["lat"].','.$map_details["lng"].'&z=9&t=m&mapclient=embed&q='.$gadress.'" id="A_41">'.__( "View larger map", "acf-vc-integrator" ).'</a>
+				</div>
+				<div class="placecard__right">
+					<a class="placecard__direction-link" target="_blank" href="https://maps.google.com/maps?ll='.$map_details["lat"].','.$map_details["lng"].'&z=9&t=m&mapclient=embed&daddr='.$gadress.'" id="A_9">
+						<div class="placecard__direction-icon"></div>
+						'.__( "Directions", "acf-vc-integrator" ).'
+					</a>
+				</div>
+				</div>
+			</div>
+			</div>';
+			if ( $google_map_options["type"] ) { 
+				$move_type_control = "mapTypeControlOptions: {
+					style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+					position: google.maps.ControlPosition.TOP_RIGHT
+				},";
+			}
+		}
+		$output .= '<div style="height: '.$google_map_options["map_height"].'" id="map"></div>';
+		$output .= "<script>
+		function initMap() {
+		var lat_lng = {lat: ".$map_details['lat'].", lng: ".$map_details['lng']."};
+		  var map = new google.maps.Map(document.getElementById('map'), {
+			zoom: ".$google_map_options['zoom_level'].",
+			center: lat_lng,
+			disableDefaultUI: true,
+			zoomControl: ".$google_map_options['zoom'].",
+			mapTypeControl: ".$google_map_options['type'].",
+			".$move_type_control."
+			streetViewControl: ".$google_map_options['street_view'].",
+			scaleControl: ".$google_map_options['scale'].",
+			fullscreenControl: ".$google_map_options['fullscreen']."
+		  });
+		  var marker = new google.maps.Marker({map: map, position: lat_lng});
+		}
+        
+	  </script>";
+		$output .= '<script async defer src="https://maps.googleapis.com/maps/api/js?key='.$google_api_key.'&callback=initMap&language='.$map_language.'"></script>';
+		return apply_filters('acfvc_google_map',$output,$field,$post_id);
 	}
 
 	public function date_picker($field, $args, $post_id) {

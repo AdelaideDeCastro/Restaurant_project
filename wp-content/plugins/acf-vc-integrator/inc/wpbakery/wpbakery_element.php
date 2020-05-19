@@ -114,11 +114,24 @@ if ( ! defined( 'ABSPATH' ) ) exit;
                         "Default" => "default",
                         __( 'No', 'acf-vc-integrator' ) => 'No',
                         __( 'Yes', 'acf-vc-integrator' ) => 'yes',
-                        __( 'Yes and hide if no result', 'acf-vc-integrator' ) => 'yes_no'
+                        __( 'Yes and hide if no result', 'acf-vc-integrator' ) => 'yes_no',
+                        __( 'Custom label' ) => 'custom_label',
+                        __( 'Custom label and hide if no result' ) => 'custom_label_yes_no'
+
                     ),
                     'save_always' => true,
                     'description' => __( 'Enter label to display before key value.', 'acf-vc-integrator' ),
                 ),
+                array(
+                    'type' => 'textfield',
+                    'heading' => __( 'Custom label', 'acf-vc-integrator' ),
+                    'param_name' => 'custom_label',
+                    'dependency'=>array(
+                                        'element'=>'show_label',
+                                        'value'=>array( 'custom_label', 'custom_label_yes_no' ),
+                                        'not_empty'=>false
+                                ),
+                ),                
                 array(
                     'type' => 'dropdown',
                     'heading' => __( 'Align', 'acf-vc-integrator' ),
@@ -293,6 +306,120 @@ if ( ! defined( 'ABSPATH' ) ) exit;
                     ),
                     'description' => __( 'Specify where you want the image to link.', 'acf-vc-integrator' ),
                     'group' => __( 'Gallery field', 'acf-vc-integrator' ),
+                ),
+                array(
+                    'type' => 'textfield',
+                    'heading' => __( 'Prepend text', 'acf-vc-integrator' ),
+                    'param_name' => 'file_prepend_text',
+                    'group' => __( 'File field', 'acf-vc-integrator' ),
+                ),
+                array(
+                    'type' => 'dropdown',
+                    'heading' => __( 'Link text', 'acf-vc-integrator' ),
+                    'param_name' => 'file_link_text',
+                    'value' => array(
+                        "Custom link text" => "custom_link_text",
+                        "Title" => "title",
+                        "Filename" => "filename",
+                    ),
+                    'description' => __( 'Applicable only for File Objects. The custom link text field is found under the General tab', 'acf-vc-integrator' ),
+                    'group' => __( 'File field', 'acf-vc-integrator' ),
+                ),
+                array(
+                    'type' => 'dropdown',
+                    'heading' => __( 'Link target', 'acf-vc-integrator' ),
+                    'param_name' => 'file_link_target',
+                    'value' => array(
+                        "_self" => "_self",
+                        "_blank" => "_blank",
+                    ),
+                    'group' => __( 'File field', 'acf-vc-integrator' ),
+                ),
+                array(
+                    'type' => 'textfield',
+                    'heading' => __( 'Map height', 'acf-vc-integrator' ),
+                    'param_name' => 'gm_map_height',
+                    'value' => '400px',
+                    'group' => __( 'Google map', 'acf-vc-integrator' ),
+                ),
+                array(
+                    'type' => 'textfield',
+                    'heading' => __( 'Zoom level', 'acf-vc-integrator' ),
+                    'param_name' => 'gm_zoom_level',
+                    'value' => '',
+                    'group' => __( 'Google map', 'acf-vc-integrator' ),
+                ),
+                array(
+                    'type' => 'dropdown',
+                    'heading' => __( 'Display placecard', 'acf-vc-integrator' ),
+                    'param_name' => 'gm_show_placecard',
+                    'value' => array(
+                        "Default" => "default",
+                        "No" => 0,
+                        "Yes" => 1,
+                    ),
+                    'save_always' => true,
+                    'group' => __( 'Google map', 'acf-vc-integrator' ),
+                ),
+                array(
+                    'type' => 'dropdown',
+                    'heading' => __( 'Display map type control', 'acf-vc-integrator' ),
+                    'param_name' => 'gm_map_type_control',
+                    'value' => array(
+                        "Default" => "default",
+                        "No" => 0,
+                        "Yes" => 1,
+                    ),
+                    'save_always' => true,
+                    'group' => __( 'Google map', 'acf-vc-integrator' ),
+                ),
+                array(
+                    'type' => 'dropdown',
+                    'heading' => __( 'Display fullscreen control', 'acf-vc-integrator' ),
+                    'param_name' => 'gm_fullscreen_control',
+                    'value' => array(
+                        "Default" => "default",
+                        "No" => 0,
+                        "Yes" => 1,
+                    ),
+                    'save_always' => true,
+                    'group' => __( 'Google map', 'acf-vc-integrator' ),
+                ),
+                array(
+                    'type' => 'dropdown',
+                    'heading' => __( 'Display street view control', 'acf-vc-integrator' ),
+                    'param_name' => 'gm_street_view_control',
+                    'value' => array(
+                        "Default" => "default",
+                        "No" => 0,
+                        "Yes" => 1,
+                    ),
+                    'save_always' => true,
+                    'group' => __( 'Google map', 'acf-vc-integrator' ),
+                ),
+                array(
+                    'type' => 'dropdown',
+                    'heading' => __( 'Display zoom control', 'acf-vc-integrator' ),
+                    'param_name' => 'gm_zoom_control',
+                    'value' => array(
+                        "Default" => "default",
+                        "No" => 0,
+                        "Yes" => 1,
+                    ),
+                    'save_always' => true,
+                    'group' => __( 'Google map', 'acf-vc-integrator' ),
+                ),
+                array(
+                    'type' => 'dropdown',
+                    'heading' => __( 'Display scale', 'acf-vc-integrator' ),
+                    'param_name' => 'gm_scale',
+                    'value' => array(
+                        "Default" => "default",
+                        "No" => 0,
+                        "Yes" => 1,
+                    ),
+                    'save_always' => true,
+                    'group' => __( 'Google map', 'acf-vc-integrator' ),
                 ),
             )
         ),

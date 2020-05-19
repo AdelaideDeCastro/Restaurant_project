@@ -30,6 +30,17 @@ class Acf_vc_integrator_grid_Shortcode extends WPBakeryShortCode {
          * @var string $gallery_captiontag_dropdown
          * @var string $gallery_captiontag
          * @var string $gallery_link
+         * @var string $file_link_text
+         * @var string $file_prepend_text
+         * @var string $file_link_traget
+         * @var string $gm_show_placecard
+         * @var string $gm_map_type_control
+         * @var string $gm_fullscreen_control
+         * @var string $gm_street_view_control
+         * @var string $gm_zoom_control
+         * @var string $gm_scale
+         * @var string $gm_map_height
+         * @var string $gm_zoom_level
          */
         extract( shortcode_atts( array(
             'el_class' => '',
@@ -51,6 +62,14 @@ class Acf_vc_integrator_grid_Shortcode extends WPBakeryShortCode {
             'gallery_captiontag_dropdown' => '',
             'gallery_captiontag' => '',
             'gallery_link' => '',
+            'gm_show_placecard' => '',
+            'gm_map_type_control' => '',
+            'gm_fullscreen_control' => '',
+            'gm_street_view_control' => '',
+            'gm_zoom_control' => '',
+            'gm_scale' => '',
+            'gm_map_height' => '',
+            'gm_zoom_level' => '',
         ), $atts ) );
 
 $acf_version = get_acf_version_number();

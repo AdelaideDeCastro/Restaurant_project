@@ -14,7 +14,7 @@ class vcLgImgVideoWithSquare extends WPBakeryShortCode
 	public function vc_lg_img_video_with_square_mapping()
 	{
 
-		 if ( !defined( 'WPB_VC_VERSION' ) ) {
+		if ( !defined( 'WPB_VC_VERSION' ) ) {
             exit();
             return;
         }

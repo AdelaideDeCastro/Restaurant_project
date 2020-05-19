@@ -3,7 +3,7 @@ Contributors: Frederik Rosendahl-Kaa
 Tags: ACF, Advanced Custom Fields, WPBakery Page Builder, WPBakery, Page builder, VC, Visual Composer, Templatera, Grid builder
 Requires at least: 4.4.0
 Tested up to: 5.2.2
-Stable tag: 1.7.4
+Stable tag: 1.8.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -66,7 +66,25 @@ All Advanced Custom Fields are supported, and easy to target with your own CSS c
 * Flexible Content
 * Clone
 
+= Google Map API =
+To use google map you need a google map api key.
+Read more on [https://www.advancedcustomfields.com/resources/google-map#google-map%20api](https://www.advancedcustomfields.com/resources/google-map#google-map%20api)
+
 == Changelog ==
+
+= 1.8.1 =
+Release Date: October 7, 2019
+
+* Bug fix: Default fields for google map settings showed incorrect info after saving.
+
+= 1.8.0 =
+Release Date: October 5, 2019
+
+* Change: Updated Google map field output to use the Google Maps JavaScript API instead of using Google map embed code for output.
+* New stuff: Added option to adjust google map settings.
+* New stuff: Added prepend text, link text ( custom link text, Title, filename ), link target for file field.
+* New stuff: Added option to select custom label in show label option field.
+* Updated languages file
 
 = 1.7.4 =
 Release Date: July 31, 2019
