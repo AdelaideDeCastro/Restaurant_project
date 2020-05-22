@@ -1,4 +1,12 @@
 <?php
+if ( ! class_exists( 'WPBakeryShortCode' ) ) {
+    /*
+     * Plugin WP Bakery is not activated. Extending to the class will lead to
+     * fatal errors.
+     */
+    return false;
+}
+
 $directory = get_template_directory() . '/wp-bakery';
 
 //get all files in specified directory
