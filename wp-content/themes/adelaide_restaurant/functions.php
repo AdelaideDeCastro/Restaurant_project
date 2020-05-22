@@ -1,6 +1,6 @@
 <?php 
 //Register menu
-require_once( 'includes/nav-menu.php' );
+require_once( 'includes/setup.php' );
 
 //Register widget footer
 require_once( 'includes/register_sidebar.php' );

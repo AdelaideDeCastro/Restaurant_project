@@ -1,4 +1,5 @@
 /wp-content/themes/adelaide_restaurant/node_modules
+/wp-content/uploads
 /.idea
 /wp-config.php
 /.htaccess
