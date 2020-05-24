@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 5.4.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2020-05-08 15:33:43+0000\n"
+"PO-Revision-Date: 2020-05-14 13:51:53+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -27,9 +27,17 @@ msgstr "1"
 msgid "Continue"
 msgstr "Doorgaan"
 
+#: wp-admin/includes/theme.php:304
+msgid "Wide Blocks"
+msgstr "Brede blokken"
+
+#: wp-admin/includes/theme.php:281
+msgid "Block Editor Styles"
+msgstr "Stijlen van de blok-editor"
+
 #: wp-admin/about.php:163
 msgid "See progress as you process export and erasure requests through the privacy tools."
-msgstr "Zie de voortgang van export en verwijderverzoeken via de privacy tools."
+msgstr "Zie de voortgang van export en verwijderverzoeken via de privacy gereedschap."
 
 #: wp-admin/about.php:162
 msgid "Now personal data exports include users session information and users location data from the community events widget. Plus, a table of contents!"
@@ -1277,7 +1285,7 @@ msgstr "Er is een nieuwe versie van %1$s beschikbaar, maar deze werkt niet met j
 msgid "This plugin failed to load properly and is paused during recovery mode."
 msgstr "De plugin kon niet juist geladen worden en is gepauzeerd tijdens herstel mode."
 
-#: wp-admin/includes/theme.php:935
+#: wp-admin/includes/theme.php:937
 msgid "Go to the Themes screen"
 msgstr "Ga naar het thema's scherm"
 
@@ -2564,11 +2572,11 @@ msgctxt "plugin"
 msgid "Resume %s"
 msgstr "%s hervatten"
 
-#: wp-admin/includes/theme.php:933
+#: wp-admin/includes/theme.php:935
 msgid "You can find more details and make changes on the Themes screen."
 msgstr "Je kan meer details vinden and wijzigingen maken in het thema's scherm."
 
-#: wp-admin/includes/theme.php:932
+#: wp-admin/includes/theme.php:934
 msgid "One or more themes failed to load properly."
 msgstr "Eén of meer thema's werden niet correct geladen."
 
@@ -2577,7 +2585,7 @@ msgstr "Eén of meer thema's werden niet correct geladen."
 msgid "Deleting a category does not delete the posts in that category. Instead, posts that were only assigned to the deleted category are set to the default category %s. The default category cannot be deleted."
 msgstr "Een categorie verwijderen verwijdert niet de berichten in die categorie. Berichten die waren toegewezen aan de verwijderde categorie, worden daarom toegewezen aan de standaard categorie %s. De standaard categorie kan niet verwijderd worden."
 
-#: wp-admin/includes/theme.php:905
+#: wp-admin/includes/theme.php:907
 msgid "Could not resume the theme."
 msgstr "Kon thema niet hervatten."
 
@@ -4114,7 +4122,7 @@ msgid "Select one or more Theme features to filter by"
 msgstr "Één of meerdere themafuncties selecteren om op te filteren"
 
 #. translators: %s: Number of ratings.
-#: wp-admin/includes/theme.php:746 wp-admin/theme-install.php:342
+#: wp-admin/includes/theme.php:748 wp-admin/theme-install.php:342
 msgid "(%s ratings)"
 msgstr "(%s waarderingen)"
 
@@ -4285,7 +4293,7 @@ msgstr "%s is verwijderd."
 msgid "The search for installed plugins will search for terms in their name, description, or author."
 msgstr "Het zoeken naar geïnstalleerde plugins vindt plaats op basis van termen in hun naam, beschrijving of auteur. "
 
-#: wp-admin/includes/theme.php:284
+#: wp-admin/includes/theme.php:285
 msgid "Custom Logo"
 msgstr "Aangepast logo"
 
@@ -4454,11 +4462,11 @@ msgstr "E-Commerce"
 msgid "Blog"
 msgstr "Blog"
 
-#: wp-admin/includes/theme.php:288
+#: wp-admin/includes/theme.php:289
 msgid "Footer Widgets"
 msgstr "Footer Widgets"
 
-#: wp-admin/includes/theme.php:296
+#: wp-admin/includes/theme.php:297
 msgid "Grid Layout"
 msgstr "Grid Lay-out"
 
@@ -5912,7 +5920,7 @@ msgstr "Berichtenpagina"
 msgid "You are currently editing the page that shows your latest posts."
 msgstr "Je bent op dit moment een pagina aan het bewerken die de laatste berichten toont."
 
-#: wp-admin/includes/theme.php:710 wp-admin/themes.php:538
+#: wp-admin/includes/theme.php:712 wp-admin/themes.php:538
 msgid "Close details dialog"
 msgstr "Detaildialoogvenster sluiten"
 
@@ -6644,7 +6652,7 @@ msgid "Accessibility Ready"
 msgstr "Toegankelijkheid voorbereid"
 
 #. translators: %s: Theme name.
-#: wp-admin/includes/theme.php:767 wp-admin/themes.php:578
+#: wp-admin/includes/theme.php:769 wp-admin/themes.php:578
 msgid "This is a child theme of %s."
 msgstr "Dit is een subthema van %s."
 
@@ -6738,15 +6746,15 @@ msgstr "De volgende plugins zijn bijgewerkt:"
 msgid "Add Widget"
 msgstr "Widget toevoegen"
 
-#: wp-admin/includes/theme.php:709 wp-admin/themes.php:537
+#: wp-admin/includes/theme.php:711 wp-admin/themes.php:537
 msgid "Show next theme"
 msgstr "Volgende thema tonen"
 
-#: wp-admin/includes/theme.php:708 wp-admin/themes.php:536
+#: wp-admin/includes/theme.php:710 wp-admin/themes.php:536
 msgid "Show previous theme"
 msgstr "Vorige thema tonen"
 
-#: wp-admin/includes/theme.php:757 wp-admin/themes.php:568
+#: wp-admin/includes/theme.php:759 wp-admin/themes.php:568
 msgid "Update Available"
 msgstr "Nieuwe versie beschikbaar"
 
@@ -9105,7 +9113,7 @@ msgid "Plugins %s"
 msgstr "Plugins %s"
 
 #. translators: %s: Plugin name.
-#: wp-admin/includes/theme.php:793
+#: wp-admin/includes/theme.php:795
 #: wp-admin/includes/class-wp-theme-install-list-table.php:483
 #: wp-admin/includes/deprecated.php:1384 wp-admin/theme-install.php:300
 #: wp-admin/theme-install.php:320
@@ -9119,7 +9127,7 @@ msgstr "Alle gebruikers"
 #: wp-admin/includes/class-wp-links-list-table.php:88
 #: wp-admin/includes/class-wp-links-list-table.php:334
 #: wp-admin/includes/class-wp-themes-list-table.php:233
-#: wp-admin/includes/theme.php:788
+#: wp-admin/includes/theme.php:790
 #: wp-admin/includes/class-wp-plugins-list-table.php:531
 #: wp-admin/includes/class-wp-plugins-list-table.php:699
 #: wp-admin/includes/class-wp-plugins-list-table.php:748
@@ -9224,7 +9232,7 @@ msgstr "Gebruikers toegevoegd."
 #: wp-admin/includes/class-wp-debug-data.php:853
 #: wp-admin/includes/class-wp-debug-data.php:1036
 #: wp-admin/includes/class-wp-themes-list-table.php:263
-#: wp-admin/includes/theme.php:734
+#: wp-admin/includes/theme.php:736
 #: wp-admin/includes/class-wp-plugins-list-table.php:904
 #: wp-admin/includes/class-wp-plugin-install-list-table.php:507
 #: wp-admin/includes/class-wp-theme-install-list-table.php:360
@@ -9350,19 +9358,19 @@ msgstr ""
 "Klik op de volgende link om je gebruikersaccount te activeren:\n"
 "%%s"
 
-#: wp-admin/includes/theme.php:287
+#: wp-admin/includes/theme.php:288
 msgid "Featured Images"
 msgstr "Uitgelichte afbeeldingen"
 
-#: wp-admin/includes/theme.php:290 wp-admin/includes/meta-boxes.php:480
+#: wp-admin/includes/theme.php:291 wp-admin/includes/meta-boxes.php:480
 msgid "Post Formats"
 msgstr "Berichtformaten"
 
-#: wp-admin/includes/theme.php:289
+#: wp-admin/includes/theme.php:290
 msgid "Full Width Template"
 msgstr "Volledige breedte template"
 
-#: wp-admin/includes/theme.php:286
+#: wp-admin/includes/theme.php:287
 msgid "Featured Image Header"
 msgstr "Uitgelichte kopafbeelding"
 
@@ -9533,7 +9541,7 @@ msgstr "Ge&#252;ploade afbeeldingen"
 msgid "<strong>Random:</strong> Show a different image on each page."
 msgstr "<strong>Willekeurig:</strong> Toon een andere afbeelding op iedere pagina."
 
-#: wp-admin/includes/theme.php:295 wp-admin/includes/theme.php:330
+#: wp-admin/includes/theme.php:296 wp-admin/includes/theme.php:332
 #: wp-admin/includes/class-wp-screen.php:1200 wp-admin/index.php:68
 msgid "Layout"
 msgstr "Lay-out"
@@ -9815,7 +9823,7 @@ msgstr "Het bijwerkproces gaat starten. Dit proces kan op sommige hosts enige ti
 msgid "Apply Filters"
 msgstr "Filters toepassen"
 
-#: wp-admin/includes/theme.php:285
+#: wp-admin/includes/theme.php:286
 msgid "Editor Style"
 msgstr "Stijl-editor"
 
@@ -11174,7 +11182,7 @@ msgstr ""
 "Je staat op het punt het thema '%s' te verwijderen.\n"
 "  'Annuleren' om te stoppen, 'OK' om te verwijderen."
 
-#: wp-admin/includes/theme.php:723 wp-admin/themes.php:551
+#: wp-admin/includes/theme.php:725 wp-admin/themes.php:551
 msgid "Current Theme"
 msgstr "Huidig thema"
 
@@ -11190,7 +11198,7 @@ msgstr "Thema selecteren om te bewerken:"
 msgid "Edit Themes"
 msgstr "Thema's bewerken"
 
-#: wp-admin/includes/theme.php:777 wp-admin/themes.php:584
+#: wp-admin/includes/theme.php:779 wp-admin/themes.php:584
 msgid "Tags:"
 msgstr "Tags:"
 
@@ -12010,7 +12018,7 @@ msgid "Unable to locate WordPress theme directory."
 msgstr "Kan de WordPress themamap niet lokaliseren."
 
 #. translators: %s: Theme version.
-#: wp-admin/includes/theme.php:728 wp-admin/themes.php:556
+#: wp-admin/includes/theme.php:730 wp-admin/themes.php:556
 #: wp-admin/theme-install.php:352
 msgid "Version: %s"
 msgstr "Versie: %s"
@@ -12027,47 +12035,47 @@ msgstr "Thema's zoeken"
 msgid "Holiday"
 msgstr "Vakantie"
 
-#: wp-admin/includes/theme.php:267 wp-admin/includes/theme.php:332
+#: wp-admin/includes/theme.php:267 wp-admin/includes/theme.php:334
 msgid "Subject"
 msgstr "Onderwerp"
 
-#: wp-admin/includes/theme.php:291
+#: wp-admin/includes/theme.php:292
 msgid "Sticky Post"
 msgstr "Sticky berichten"
 
-#: wp-admin/includes/theme.php:292
+#: wp-admin/includes/theme.php:293
 msgid "Theme Options"
 msgstr "Thema opties"
 
-#: wp-admin/includes/theme.php:282
+#: wp-admin/includes/theme.php:283
 msgid "Custom Colors"
 msgstr "Aangepaste kleuren"
 
-#: wp-admin/includes/theme.php:279 wp-admin/includes/theme.php:331
+#: wp-admin/includes/theme.php:279 wp-admin/includes/theme.php:333
 msgid "Features"
 msgstr "Eigenschappen"
 
-#: wp-admin/includes/theme.php:302
+#: wp-admin/includes/theme.php:303
 msgid "Right Sidebar"
 msgstr "Sidebar rechts"
 
-#: wp-admin/includes/theme.php:301
+#: wp-admin/includes/theme.php:302
 msgid "Left Sidebar"
 msgstr "Sidebar links"
 
-#: wp-admin/includes/theme.php:300
+#: wp-admin/includes/theme.php:301
 msgid "Four Columns"
 msgstr "Vier kolommen"
 
-#: wp-admin/includes/theme.php:299
+#: wp-admin/includes/theme.php:300
 msgid "Three Columns"
 msgstr "Drie kolommen"
 
-#: wp-admin/includes/theme.php:298
+#: wp-admin/includes/theme.php:299
 msgid "Two Columns"
 msgstr "Twee kolommen"
 
-#: wp-admin/includes/theme.php:297
+#: wp-admin/includes/theme.php:298
 msgid "One Column"
 msgstr "Eén kolom"
 
@@ -13758,7 +13766,7 @@ msgstr "Afbeeldingsverwerkingsfout"
 msgid "Header updated. <a href=\"%s\">Visit your site</a> to see how it looks."
 msgstr "Header bijgewerkt. <a href=\"%s\">Bezoek je site</a> om te zien hoe het er uit ziet."
 
-#: wp-admin/includes/theme.php:283
+#: wp-admin/includes/theme.php:284
 #: wp-admin/includes/class-custom-image-header.php:475
 msgid "Custom Header"
 msgstr "Header aanpassen"
@@ -13779,7 +13787,7 @@ msgid "Background updated. <a href=\"%s\">Visit your site</a> to see how it look
 msgstr "Achtergrond bijgewerkt. <a href=\"%s\">De site bekijken</a> om het resultaat te zien."
 
 #: wp-admin/includes/class-custom-background.php:226
-#: wp-admin/includes/theme.php:281
+#: wp-admin/includes/theme.php:282
 msgid "Custom Background"
 msgstr "Aangepaste achtergrond"
 

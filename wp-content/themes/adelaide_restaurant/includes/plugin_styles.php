@@ -7,9 +7,10 @@ add_action( 'wp_enqueue_scripts', 'register_plugin_styles' );
  */
 function register_plugin_styles()
 {
-    wp_enqueue_script( 'consulting-front', get_template_directory_uri() . '/script.js', [ 'jquery' ], time(), true );
-    /*
-     * Always include last
-     */
-    wp_enqueue_style( 'theme', get_stylesheet_uri(), array(), time() );
+    // add custom css file
+    wp_enqueue_style( 'main-css', get_template_directory_uri() . '/assets/css/main.css' );
+
+    // add custom js file
+    wp_enqueue_script( 'main-js', get_template_directory_uri() . '/assets/js/main.min.js', array (), null, true );
+
 }
