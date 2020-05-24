@@ -14,7 +14,7 @@ class vcSmImgWithSquare extends WPBakeryShortCode
 	public function vc_sm_img_with_square_mapping()
 	{
 
-		 if ( !defined( 'WPB_VC_VERSION' ) ) {
+		if ( !defined( 'WPB_VC_VERSION' ) ) {
             exit();
             return;
         }
@@ -26,6 +26,22 @@ class vcSmImgWithSquare extends WPBakeryShortCode
 			'category'		=> __( 'Restaurant Element', 'text-domain' ),
 			'icon'			=> get_template_directory_uri() . '/img/logo.png',
 			'params'		=> [
+				[
+					'type'			=> 'textarea_html',
+					'param_name'	=> 'content',
+					'heading'		=> 'Add a dummy content',
+				],
+				[
+					'type'			=> 'dropdown',
+					'param_name'	=> 'alignment',
+					'heading'		=> 'Select how to align your text',
+					'value'			=> [
+						'Choose text alignment'=> 'align_default',
+						'Align central'=> 'align_central',
+						'Align_left'=> 'align_left',
+
+					],
+				],
 				[
 					'type'			=> 'attach_image',
 					'param_name'	=> 'img',
@@ -46,28 +62,60 @@ class vcSmImgWithSquare extends WPBakeryShortCode
 	}
 
 	//Element html
-	public function vc_sm_img_with_square_html( $atts ) 
+	public function vc_sm_img_with_square_html( $atts, $content ) 
 	{
 		ob_start();
+
+		// echo "<pre>";
+
+		// print_r( $content );
+
+		// echo "</pre>";
+
+		// echo "<pre>";
+
+		// print_r( $atts );
+
+		// echo "</pre>";
 
 		$single_img = wp_get_attachment_image_src( $atts['img'] );
 
 		if ( !empty( $single_img[0] ) ) {
 			if ( $atts['side'] == 'right' ) { ?>
-			
-				<div class="surrounded-img position-relative">
-	                <div class="bg-img bg-img-home bg-img-sm mx-auto" style="background-image: url(' <?= $single_img[0] ?> ');"></div>
-	       	        <div class="border-around-img border-around-img-sm position-absolute"></div>
-	            </div>
+
+				<div class="description-wrapper">
+					<div class="row">
+						<div class="col-sm-8 offset-sm-2 col-lg-4<?php if( $atts['alignment'] == 'align_central' ) {
+							echo " align-self-center text-center";} else { echo ""; } ?>">
+							<?= $content; ?>
+						</div>
+						<div class="col-sm-4 offset-sm-4 offset-lg-0 mt-5 mt-lg-0">
+							<div class="surrounded-img position-relative">
+								<div class="bg-img bg-img-home bg-img-sm mx-auto" style="background-image: url(' <?= $single_img[0] ?> ');"></div>
+								<div class="border-around-img border-around-img-sm position-absolute"></div>
+							</div>
+						</div>
+					</div>
+				</div>
 
 			<?php
 			}
 
 			if ( $atts['side'] == 'left' ) { ?>
-				
-				<div class="surrounded-img position-relative flex-grow-1">
-					<div class="bg-img bg-img-home bg-img-sm" style="background-image: url(' <?= $single_img[0] ?> ');"></div>
-					<div class="border-around-img border-around-img-sm border-around-img-lf position-absolute"></div>
+
+				<div class="description-wrapper">
+					<div class="row">
+						<div class="col-sm-4 offset-sm-4 offset-lg-0 mt-5 mt-lg-0">
+							<div class="surrounded-img position-relative">
+								<div class="bg-img bg-img-home bg-img-sm" style="background-image: url(' <?= $single_img[0] ?> ');"></div>
+								<div class="border-around-img border-around-img-sm position-absolute"></div>
+							</div>
+						</div>
+						<div class="col-sm-8 offset-sm-2 col-lg-4<?php if( $atts['alignment'] == 'align_central' ) {
+							echo " align-self-center text-center";} else { echo ""; } ?>">
+							<?= $content; ?>
+						</div>
+					</div>
 				</div>
 
 			<?php

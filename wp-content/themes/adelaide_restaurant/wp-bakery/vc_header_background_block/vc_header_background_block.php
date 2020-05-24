@@ -84,7 +84,7 @@ class vcHeaderBackgroundBlock extends WPBakeryShortCode
 
 			if ( $atts['type_content'] == 'text' && !empty( $const ) ) { ?>
 
-				<div class="container-fluid bg-img bg-img-header d-flex justify-content-center" style="background-image: url( ' <?= $header_img[0] ?> ' );">
+				<div class="bg-img bg-img-header d-flex justify-content-center" style="background-image: url( ' <?= $header_img[0] ?> ' );">
 		        	<div class="text-center align-self-center">
 						<div class="text-primary"><?= $const; ?></div>
 		 			</div>
