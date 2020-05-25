@@ -24,13 +24,42 @@ class vcGallery extends WPBakeryShortCode
         	'description'	=> __( 'Gallery with text', 'text-domain' ),
         	'category'		=> __( 'Restaurant Element', 'text-domain' ),
         	'icon'			=> get_template_directory_uri() . '/img/logo.png',
-			'params' 		=> [					
+			'params' 		=> [
+				[
+					'type'			=> 'dropdown',
+					'param_name'	=> 'gallery_title',
+					'heading'		=> 'Add title to gallery (optional)',
+					'value'			=> [
+						'Choose title or link'	=> 'title_link',
+						'Title'					=> 'std_title',
+						'Link'					=> 'std_link',
+					],
+					'std'			=> 'title_link',
+				],	
+				[
+					'type'			=> 'textfield',
+					'param_name'	=> 'general_title',
+					'heading'		=> 'Add title to gallery',
+					'dependency'	=> [
+						'element'	=> 'gallery_title',
+						'value'		=> 'std_title',
+					],
+				],
+				[
+					'type'			=> 'vc_link',
+					'param_name'	=> 'link',
+					'heading'		=> 'Add title as link to gallery',
+					'dependency'	=> [
+						'element'	=> 'gallery_title',
+						'value'		=> 'std_link',
+					],
+				],			
 				// params group
 				[
-					'type' => 'param_group',
-					'value' => '',
+					'type'			=> 'param_group',
+					'value'			=> '',
 					'heading'		=> 'Add images and text to the gallery',
-					'param_name' => 'gallery_content',
+					'param_name'	=> 'gallery_content',
 					// Note params is mapped inside param-group:
 					'params' => [
 						[
@@ -65,12 +94,35 @@ class vcGallery extends WPBakeryShortCode
 
 		$galleries = vc_param_group_parse_atts( $atts['gallery_content'] );
 
+		// echo "<pre>";
+
+		// print_r( $atts );
+
+		// echo "</pre>";
+
 		$counter = 1; ?>
 
-		<div class="menu-wrapper w-100">
+		<div class="menu-wrapper w-100 my-5">
 			<div class="menu-overview-slick slick-arrow-position">
 
 				<?php
+				if ( !empty( $atts['gallery_title'] ) ) {
+					if( $atts['gallery_title'] == 'std_title' ) { ?>
+					
+						<h1 class="text-center"><?= $atts['general_title']; ?></h1>
+
+					<?php
+					} else { 
+					
+						$btn_link = vc_build_link( $atts['link'] );
+						?>
+
+						<h1 class="text-center"><a href="<?= $btn_link['url'] ?>" title="<?= $btn_link['title']; ?>"><?= $btn_link['title']; ?></a></h1>
+				
+					<?php
+					}
+
+				}
 				foreach ($galleries as $gallery ) {
 
 					if ( !empty( $gallery['img'] ) && !empty( $gallery['title'] ) && !empty( $gallery['description'] ) ) { 
@@ -96,7 +148,7 @@ class vcGallery extends WPBakeryShortCode
 		                            <p><?= $gallery['description'] ?></p>
 		                        </div>
 		                        <div class="menu-slick-img bg-img" style="background-image: url(' <?= $galleries_img[0]; ?> ');"></div>
-		                    </div> -->
+		                    </div>
 
 		                <?php
 		            	} 

@@ -36,15 +36,8 @@ header {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
-	&.bg-img-header {
+	&.bg-img-fluid {
 		height: 20em;
-	}
-	&.bg-img-sm {
-		width: 235px;
-		height: 17.875em;
-	}
-	&.bg-img-reservation {
-		height: 18.75em;
 		.link-reservatin {
 			bottom: 0;
 		    left: 0;
@@ -61,6 +54,10 @@ header {
 				height: inherit;
 		    }
 		}
+	}
+	&.bg-img-sm {
+		width: 235px;
+		height: 17.875em;
 	}
 	&.bg-img-team {
 		width: 100%;
