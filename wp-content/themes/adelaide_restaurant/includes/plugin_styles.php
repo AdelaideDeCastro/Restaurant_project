@@ -11,6 +11,6 @@ function register_plugin_styles()
     wp_enqueue_style( 'main-css', get_template_directory_uri() . '/assets/css/main.css' );
 
     // add custom js file
-    wp_enqueue_script( 'main-js', get_template_directory_uri() . '/assets/js/main.min.js', array (), null, true );
+    wp_enqueue_script( 'main-js', get_template_directory_uri() . '/assets/js/main.min.js', [ 'jquery' ], time(), true );
 
 }

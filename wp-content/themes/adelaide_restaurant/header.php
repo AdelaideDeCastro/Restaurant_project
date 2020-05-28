@@ -28,6 +28,16 @@ wp_body_open();
                 <h3 class="text-primary"><?php echo get_bloginfo( 'name', 'raw' ) ?></h3>
             </div>
             <div class="align-self-center">
+                <?php
+                    wp_nav_menu( [ 
+                        'theme_location'    => 'header_menu',
+                        'container'         => 'ul',
+                        'menu_class'        => 'nav',
+                    ] );
+                ?>
+            </div>
+
+            <!-- <div class="align-self-center">
                 <ul class="nav">
                     <li class="nav-item">
                         <a class="nav-link active" href="index.html">Home</a>
@@ -51,7 +61,7 @@ wp_body_open();
                         <a class="nav-link" href="contact.html">Contact</a>
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </div>
 </header>

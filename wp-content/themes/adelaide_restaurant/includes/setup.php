@@ -39,4 +39,14 @@ if ( ! function_exists('restaurant_theme_setup') ) {
 
     add_action( 'after_setup_theme', 'restaurant_theme_setup' );
 
+
+     // Register Widgets
+    include( 'widgets/footer_widget.php' );
+
+    function restaurant_register_widgets() {
+        register_widget( 'Reservetion_Link' );
+    }
+
+    add_action( 'widgets_init', 'restaurant_register_widgets' );
+
 }

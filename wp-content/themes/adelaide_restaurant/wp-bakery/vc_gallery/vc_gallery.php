@@ -21,7 +21,7 @@ class vcGallery extends WPBakeryShortCode
         vc_map( [
 			'name'			=> __( 'Gallery', 'text-domain' ),
         	'base'			=> 'vc_gallery',
-        	'description'	=> __( 'Gallery with text', 'text-domain' ),
+        	'description'	=> __( 'Gallery with text or overlay', 'text-domain' ),
         	'category'		=> __( 'Restaurant Element', 'text-domain' ),
         	'icon'			=> get_template_directory_uri() . '/img/logo.png',
 			'params' 		=> [
@@ -53,12 +53,27 @@ class vcGallery extends WPBakeryShortCode
 						'element'	=> 'gallery_title',
 						'value'		=> 'std_link',
 					],
-				],			
+				],
+				[
+					'type'			=> 'dropdown',
+					'param_name'	=> 'type_gallery',
+					'heading'		=> 'Choose to add a gallery with text or just a gallery with overlay of images',
+					'value'			=> [
+						'Choose type gallery'				=> 'choose_gallery',
+						'Gallery with text'					=> 'gallery_text',
+						'Gallery with overlay of images'	=> 'gallery_overlay',
+					],
+					'std'			=> 'choose_gallery',
+				],
 				// params group
 				[
 					'type'			=> 'param_group',
 					'value'			=> '',
 					'heading'		=> 'Add images and text to the gallery',
+					'dependency'	=> [
+						'element'	=> 'type_gallery',
+						'value'		=> 'gallery_text',
+					],
 					'param_name'	=> 'gallery_content',
 					// Note params is mapped inside param-group:
 					'params' => [
@@ -81,7 +96,16 @@ class vcGallery extends WPBakeryShortCode
 							'param_name'=> 'description',
 						],
 					]
-				]
+				],
+				[
+					'type'			=> 'attach_images',
+					'param_name'	=> 'gallery_overlay_imgs',
+					'heading'		=> 'Add images',
+					'dependency'	=> [
+						'element'	=> 'type_gallery',
+						'value'		=> 'gallery_overlay'
+					],
+				],
 			],
 		] );
 
@@ -94,72 +118,96 @@ class vcGallery extends WPBakeryShortCode
 
 		$galleries = vc_param_group_parse_atts( $atts['gallery_content'] );
 
-		// echo "<pre>";
-
-		// print_r( $atts );
-
-		// echo "</pre>";
-
 		$counter = 1; ?>
 
-		<div class="menu-wrapper w-100 my-5">
-			<div class="menu-overview-slick slick-arrow-position">
+			<?php
+			if ( !empty( $atts['gallery_title'] ) ) {
+				if( $atts['gallery_title'] == 'std_title' ) { ?>
+				
+					<h1 class="text-center mt-5"><?= $atts['general_title']; ?></h1>
 
 				<?php
-				if ( !empty( $atts['gallery_title'] ) ) {
-					if( $atts['gallery_title'] == 'std_title' ) { ?>
-					
-						<h1 class="text-center"><?= $atts['general_title']; ?></h1>
-
-					<?php
-					} else { 
-					
-						$btn_link = vc_build_link( $atts['link'] );
-						?>
-
-						<h1 class="text-center"><a href="<?= $btn_link['url'] ?>" title="<?= $btn_link['title']; ?>"><?= $btn_link['title']; ?></a></h1>
+				} else { 
 				
-					<?php
-					}
+					$btn_link = vc_build_link( $atts['link'] );
+					?>
 
+					<h1 class="text-center mt-5"><a href="<?= $btn_link['url'] ?>" title="<?= $btn_link['title']; ?>"><?= $btn_link['title']; ?></a></h1>
+			
+				<?php
 				}
-				foreach ($galleries as $gallery ) {
+			}
 
-					if ( !empty( $gallery['img'] ) && !empty( $gallery['title'] ) && !empty( $gallery['description'] ) ) { 
+			if ( $atts['type_gallery'] == 'gallery_text' ) { ?>
 
-						$galleries_img = wp_get_attachment_image_src( $gallery['img'], 'full' ); 
-
-						if( $counter % 2 ) { ?>
-				
-							<div class="menu-card">
-								<div class="menu-slick-img bg-img" style="background-image: url(' <?= $galleries_img[0]; ?> ');"></div>
-								<div class="slick-content text-center">
-		                        	<h2 class="text-primary"><?= $gallery['title']; ?></h2>
-		                        	<p><?= $gallery['description'] ?></p>
-		                        </div>
-							</div>
+				<div class="menu-wrapper w-100<?php if( empty( $atts['gallery_title'] ) ) { echo ' my-5'; } else { echo ' pb-5 mb-5'; } ?>">
+					<div class="menu-overview-slick slick-arrow-position">
 
 						<?php
-						} else { ?>
+						foreach ($galleries as $gallery ) {
 
-							<div class="menu-card">
-		                        <div class="slick-content text-center">
-		                            <h2 class="text-primary"><?= $gallery['title']; ?></h2>
-		                            <p><?= $gallery['description'] ?></p>
-		                        </div>
-		                        <div class="menu-slick-img bg-img" style="background-image: url(' <?= $galleries_img[0]; ?> ');"></div>
-		                    </div>
+							if ( !empty( $gallery['img'] ) && !empty( $gallery['title'] ) && !empty( $gallery['description'] ) ) { 
 
-		                <?php
-		            	} 
-					}
+								$galleries_img = wp_get_attachment_image_src( $gallery['img'], 'full' ); 
 
-					$counter++;
+								if( $counter % 2 ) { ?>
 
-				} ?>
+									<div class="menu-card">
+										<div class="menu-slick-img bg-img" style="background-image: url(' <?= $galleries_img[0]; ?> ');"></div>
+										<div class="slick-content text-center">
+				                        	<h2 class="text-primary"><?= $gallery['title']; ?></h2>
+				                        	<p><?= $gallery['description'] ?></p>
+				                        </div>
+									</div>
+
+								<?php
+								} else { ?>
+
+									<div class="menu-card">
+				                        <div class="slick-content text-center">
+				                            <h2 class="text-primary"><?= $gallery['title']; ?></h2>
+				                            <p><?= $gallery['description'] ?></p>
+				                        </div>
+				                        <div class="menu-slick-img bg-img" style="background-image: url(' <?= $galleries_img[0]; ?> ');"></div>
+				                    </div>
+
+				                <?php
+			            		} 
+							}
+
+							$counter++;
+
+						} 
+
+						?>
+
+					</div>
+				</div>
+
+			<?php
+			}
+
+			if ( $atts['type_gallery'] == 'gallery_overlay' ) { 
+
+				$gallery_overlay_imgs = explode(',',$atts['gallery_overlay_imgs']); ?>
+
+				<div id="gallery-overlay" class=" d-flex flex-wrap<?php if( empty( $atts['gallery_title'] ) ) { echo ' my-5'; } else { echo ' mb-5'; } ?>">
+
+					<?php
+					foreach ( $gallery_overlay_imgs as $image_url ) {
+
+						$images_url = wp_get_attachment_image_src( $image_url ); ?>
+
+						
+						<a href="<?= $images_url[0]; ?>" data-lightbox="bacco-gallery" class="bg-img bg-img-sm" style="background-image: url(' <?= $images_url[0]; ?> ');"></a>
+
+					<?php } ?>
+
+				</div>
+
+			<?php } ?>
 
 			</div>
-		</div>
 
 		<?php
 		$html = ob_get_clean();

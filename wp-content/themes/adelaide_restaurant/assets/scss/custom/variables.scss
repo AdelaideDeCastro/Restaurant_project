@@ -11,14 +11,7 @@ $font-family-sans-serif: Rufina, Georgia, serif;
 $font-size-base: 1rem;
 $line-height-base: 1.5;
 
-/**
-  Headings
- */
-$headings-font-weight: $font-weight-bold;
-$h1-font-size: $font-size-base * 2.5;
-$h2-font-size: $font-size-base * 1.5;
-$h3-font-size: $font-size-base * 1.25;
-$headings-margin-bottom: 1em;
+
 
 
 $container-max-widths: (
@@ -45,6 +38,16 @@ $theme-colors: (
 
 $body-bg: $white;
 $body-color: #000;
+
+/**
+  Headings
+ */
+$headings-font-weight: $font-weight-bold;
+$h1-font-size: $font-size-base * 2.5;
+$h2-font-size: $font-size-base * 1.5;
+$h3-font-size: $font-size-base * 1.25;
+$headings-color: $primary;
+$headings-margin-bottom: 1em;
 
 // Links
 $link-color: $primary;

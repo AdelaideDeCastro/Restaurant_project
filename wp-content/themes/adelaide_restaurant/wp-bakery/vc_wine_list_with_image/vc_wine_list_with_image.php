@@ -79,85 +79,84 @@ class vcWineListWithImage extends WPBakeryShortCode
 
 		ob_start();
 
-		// echo "<pre>";
-
-		// print_r( $atts );
-
-		// echo "</pre>";
-
 		$single_img = wp_get_attachment_image_src( $atts['img'] );
 
 		$info_wine = vc_param_group_parse_atts( $atts['info_wine'] );
 
-		// echo "<pre>";
+		if ( !empty( $single_img[0] ) && !empty( $atts['info_wine'] ) ) { ?>
 
-		// print_r( $info_wine );
+			<div class="wine-wrapper my-5">
+				
+				<?php
+				if ( $atts['side'] == 'right' ) { ?>
 
-		// echo "</pre>";
+					<div class="type-wine">
+						<div class="row">
+							<div class="col-sm-8">
+								<div class="d-flex justify-content-between mb-4">
+									<h3 class="text-primary"><?= $atts['title']; ?></h3>
+									<h3 class="text-primary mr-5">Prijs</h3>
+								</div>
+								<ul class="list-unstyled mb-0">
 
-		if ( !empty( $single_img[0] ) && !empty( $atts['info_wine'] ) ) {
-			
-			if ( $atts['side'] == 'right' ) { ?>
+									<?php
+									foreach ( $info_wine as $wine ) { ?>
+										
+										<li class="d-flex"><?= $wine['name_wine']; ?><span class="ml-auto"><?= $wine['price_glass']; ?> &euro;</span> <span class="ml-4"><?= $wine['price_bottle']; ?> &euro;</span></li>
+										
+									<?php
+									}
+									?>
 
-				<div class="type-wine mt-5">
-					<div class="row">
-						<div class="col-sm-8">
-							<div class="d-flex justify-content-between mb-4">
-								<h3 class="text-primary"><?= $atts['title']; ?></h3>
-								<h3 class="text-primary mr-5">Prijs</h3>
+								</ul>
 							</div>
-							<ul class="list-unstyled mb-0">
-
-								<?php foreach ( $info_wine as $wine ) { ?>
-									
-									<li class="d-flex"><?= $wine['name_wine']; ?><span class="ml-auto"><?= $wine['price_glass']; ?> &euro;</span> <span class="ml-4"><?= $wine['price_bottle']; ?> &euro;</span></li>
-								<?php
-								}
-								?>
-
-							</ul>
-						</div>
-						<div class="col-sm-4 offset-sm-4 offset-lg-0 mt-5 mt-lg-0">
-							<div class="surrounded-img position-relative">
-								<div class="bg-img bg-img-home bg-img-sm mx-auto" style="background-image: url(' <?= $single_img[0] ?> ');"></div>
-								<div class="border-around-img border-around-img-sm position-absolute"></div>
+							<div class="col-sm-4 offset-sm-4 offset-lg-0 mt-5 mt-lg-0">
+								<div class="surrounded-img position-relative">
+									<div class="bg-img bg-img-home bg-img-sm mx-auto" style="background-image: url(' <?= $single_img[0] ?> ');"></div>
+									<div class="border-around-img border-around-img-sm position-absolute"></div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 
-			<?php
-			} else { ?>
-				<div class="type-wine mt-5">
-					<div class="row">
-						<div class="col-sm-4 offset-sm-4 offset-lg-0 mt-5 mt-lg-0">
-							<div class="surrounded-img position-relative">
-								<div class="bg-img bg-img-home bg-img-sm mx-auto" style="background-image: url(' <?= $single_img[0] ?> ');"></div>
-								<div class="border-around-img border-around-img-sm position-absolute"></div>
+				<?php
+				} else { ?>
+
+					<div class="type-wine">
+						<div class="row">
+							<div class="col-sm-4 offset-sm-4 offset-lg-0 mt-5 mt-lg-0">
+								<div class="surrounded-img position-relative">
+									<div class="bg-img bg-img-home bg-img-sm mx-auto" style="background-image: url(' <?= $single_img[0] ?> ');"></div>
+									<div class="border-around-img border-around-img-sm position-absolute"></div>
+								</div>
 							</div>
-						</div>
-						<div class="col-sm-8">
-							<div class="d-flex justify-content-between mb-4">
-								<h3 class="text-primary"><?= $atts['title']; ?></h3>
-								<h3 class="text-primary mr-5">Prijs</h3>
+							<div class="col-sm-8">
+								<div class="d-flex justify-content-between mb-4">
+									<h3 class="text-primary"><?= $atts['title']; ?></h3>
+									<h3 class="text-primary mr-5">Prijs</h3>
+								</div>
+								<ul class="list-unstyled mb-0">
+
+									<?php foreach ( $info_wine as $wine ) { ?>
+										
+										<li class="d-flex"><?= $wine['name_wine']; ?><span class="ml-auto"><?= $wine['price_glass']; ?> &euro;</span> <span class="ml-4"><?= $wine['price_bottle']; ?> &euro;</span></li>
+
+									<?php
+									}
+									?>
+
+								</ul>
 							</div>
-							<ul class="list-unstyled mb-0">
-
-								<?php foreach ( $info_wine as $wine ) { ?>
-									
-									<li class="d-flex"><?= $wine['name_wine']; ?><span class="ml-auto"><?= $wine['price_glass']; ?> &euro;</span> <span class="ml-4"><?= $wine['price_bottle']; ?> &euro;</span></li>
-								<?php
-								}
-								?>
-
-							</ul>
 						</div>
 					</div>
-				</div>
 
-			<?php
-			}
+				<?php
+				}
+				?>
 
+			</div>
+
+		<?php
 		}
 
 		$html = ob_get_clean();

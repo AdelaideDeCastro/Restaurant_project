@@ -2,45 +2,28 @@
     <div class="container">
         <div class="footer-wrapper-top">
             <div class="row">
-                <div class="col-lg-4">
-                    <h3>Openingstijden</h3>
-                    <ul class="list-unstyled mb-0">
-                        <li>Dinsdag 18:00 - 22:30</li>
-                        <li>Woensdag 18:00 - 22:30</li>
-                        <li>Donderdag 18:00 - 22:30</li>
-                        <li>Vrijdag 18:00 - 22:30</li>
-                        <li>Zaterdag 18:00 - 22:30</li>
-                        <li>Zondag 18:00 - 22:30</li>
-                    </ul>
-                </div>
-                <div class="col-lg-4">
-                    <h3>Contact</h3>
-                    <ul class="list-unstyled mb-0">
-                        <li>
-                            <a href="https://www.google.com/maps?ll=52.08111,4.289107&z=15&t=m&hl=en-GB&gl=NL&mapclient=embed&cid=15157297861794514867" class="text-white">
-                                <span class="icon"><i class="fas fa-map-marker-alt"></i></span> van Speijkstraat 246
-                                (hoek waldeck pyrmontkade)</br>
-                                2518GK Den Haag
-                            </a>
-                        </li>
-                        <li>
-                            <a href="tel:0703457175" class="text-white"><span class="icon"><i class="fas fa-phone"></i></span>
-                                0703457175
-                            </a>
-                        </li>
-                        <li>
-                            <a href="mailto:baccoperbacco@live.nl" class="text-white">
-                                <span class="icon"><i class="fas fa-envelope"></i></span> baccoperbacco@live.nl
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-lg-4">
+
+                <?php
+                global $wp_registered_sidebars;
+
+                $sidebar_count = count( $wp_registered_sidebars );
+
+                for ( $i = 1; $i <= $sidebar_count; $i ++ ) { ?>
+
+                    <div class="col-md-4">
+                        <?php dynamic_sidebar( 'footer-' . $i ); ?>
+                    </div>
+                    <?php
+
+                }
+                ?>
+                
+                <!-- <div class="col-lg-4">
                     <h3>Reserveren</h3>
                     <div class="link-reservatin mt-4">
                         <a href="contact.html" class="text-secondary">Reserveren</a>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="footer-wrapper-bottom mt-5">

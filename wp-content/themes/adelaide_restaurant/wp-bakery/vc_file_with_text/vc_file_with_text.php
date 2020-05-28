@@ -117,7 +117,7 @@ class vcFileWithText extends WPBakeryShortCode
 
 		$single_img = wp_get_attachment_image_src( $atts['img'] );
 
-		echo "<div class='file-wrapper my-5'>";
+		echo "<div class='file-wrapper my-5 pb-4'>";
 		echo "<div class='row'>"; 
 
 			
@@ -139,9 +139,9 @@ class vcFileWithText extends WPBakeryShortCode
 				<?php
 				} elseif ( $atts['type_view'] == 'gallery' ) {
 
-					$galleries = wp_get_attachment_image_src( $atts['imgs'] );
-
-					if ( !empty( $galleries ) ) { ?>
+					$galleries_array = explode( ',', $atts['imgs'] );
+					
+					if ( !empty( $galleries_array ) ) { ?>
 
 						<div class="col-sm-8 offset-sm-2 col-lg-5 offset-lg-0<?php if( $atts['alignment'] == 'align_central' ) { echo 'align-self-center text-center'; } else { echo ''; } ?>">
 							<?= $content; ?>
@@ -150,9 +150,12 @@ class vcFileWithText extends WPBakeryShortCode
 							<div class="surrounded-img surrounded-img-lg position-relative">
 								<div class="menu-slick slick-arrow-position">
 
-									<?php foreach ($galleries as $gallery) { ?>
+									<?php foreach ( $galleries_array as $gallery_src ) { 
+
+										$img_src = wp_get_attachment_image_src( $gallery_src );
+										?>
 										
-										<div class="menu-slick-img bg-img" style="background-image: url('img/antipasto_menu.jpg');"></div>
+										<div class="menu-slick-img bg-img" style="background-image: url(' <?= $img_src[0]; ?> ');"></div>
 
 									<?php } ?>
 

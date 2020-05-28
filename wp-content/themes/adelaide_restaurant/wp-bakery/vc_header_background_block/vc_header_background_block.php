@@ -94,18 +94,18 @@ class vcHeaderBackgroundBlock extends WPBakeryShortCode
 
 			if ( $atts['type_content'] == 'text' && !empty( $const ) ) { ?>
 
-				<div class="bg-img bg-img-fluid d-flex justify-content-center" style="background-image: url( ' <?= $header_img[0] ?> ' );">
-		        	<div class="text-center align-self-center">
-						<div class="text-primary"><?= $const; ?></div>
+				<div class="bg-img bg-img-fluid d-flex justify-content-center align-items-center" style="background-image: url( ' <?= $header_img[0]; ?> ' );">
+		        	<div class="link-reservation d-flex justify-content-center align-items-center">
+						<div class="description text-primary"><?= $const; ?></div>
+
+							<?php
+					            if ( $atts['select_opacity'] == 'opacity' ) { ?>
+					            	
+					            	<div class="overlapping-layer position-absolute bg-white"></div>
+
+					        <?php } ?>
+
 		 			</div>
-
-						<?php
-				            if ( $atts['select_opacity'] == 'opacity' ) { ?>
-				            	
-				            	<div class="overlapping-layer position-absolute bg-white"></div>
-
-				        <?php } ?>
-
 		 		</div>
 
 		    <?php 
@@ -117,8 +117,8 @@ class vcHeaderBackgroundBlock extends WPBakeryShortCode
 
 		        if ( !empty( $btn_link) ) { ?>
 
-		        	<div class="bg-img bg-img-fluid position-relative" style="background-image: url(' <?= $header_img[0] ?> ');">
-				        <div class="link-reservatin d-flex justify-content-center align-items-center">
+		        	<div class="bg-img bg-img-fluid position-relative" style="background-image: url(' <?= $header_img[0]; ?> ');">
+				        <div class="link-reservation d-flex justify-content-center align-items-center">
 				            <a href="<?= $btn_link['url']; ?>" title="<?= $btn_link['title']; ?>" target="<?= $btn_link['target']; ?>" class=""><?= $btn_link['title']; ?></a>
 
 				            <?php

@@ -1,10 +1,5 @@
-.link-reservatin {
-	h1,
-	a {
-		right: 40%;
-    	top: 7.641rem;
-    	z-index: 1;
-	}
+
+.link-reservation {
     a {
     	border: 0.188rem solid $secondary;
     	font-size: 1.4rem;
@@ -14,6 +9,13 @@
     		background-color: transparent;
     	}
     }
+}
+
+.fa-angle-left,
+.fa-angle-right,
+.page-numbers {
+	color: $primary;
+	font-size: 1.875em;
 }
 
 header {
@@ -27,8 +29,9 @@ header {
 			}
 		}
 	}
-	.nav-link {
+	.nav li {
 		font-size: 1.2em;
+		padding: 6px;
 	}
 }
 
@@ -38,13 +41,22 @@ header {
 	background-size: cover;
 	&.bg-img-fluid {
 		height: 20em;
-		.link-reservatin {
+		.link-reservation {
 			bottom: 0;
 		    left: 0;
 		    width: 100%;
 		    height: 100%;
 		    a {
 		    	border-color: $primary;
+
+		    	&:hover {
+		    		background-color: $primary;
+		    		color: $secondary;
+		    	}
+		    }
+		    a,
+		    .description {
+		    	z-index: 1;
 		    }
 		    .overlapping-layer {
 				opacity: 0.6;
@@ -58,6 +70,11 @@ header {
 	&.bg-img-sm {
 		width: 235px;
 		height: 17.875em;
+		&.gallery-overlay {
+			a {
+				width: 100%;
+			}
+		}
 	}
 	&.bg-img-team {
 		width: 100%;
@@ -110,18 +127,19 @@ header {
 
 .single-nieuws-img-wrapper {
 	border: 3px solid $secondary;
-	.bg-img.bg-img-sm {
-		margin: 8px;
-		width: 222px;
+	.gallery-overlay.gallery-overlay-news {
+		.bg-img.bg-img-sm {
+			margin: 8px;
+			width: 100%;
+			max-width: 46%;
+		}
 	}
 }
 
 .slick-arrow-position {
 	.slick-arrow {
-		color: $primary;
-		font-size: 1.875em;
 		position: absolute;
-		bottom: -1.8em;
+		bottom: -3.2em;
 		&.slick-arrow-left {
 			right: 55%;
 		}
@@ -153,7 +171,7 @@ header {
 	}
 }
 
-#gallery {
+#gallery-overlay {
 	a {
 		width: 100%;
 		max-width: 24%;
@@ -162,14 +180,25 @@ header {
 			width: 100%;
 		}
 	}
+	&.gallery-overlay-news {
+		a {
+			
+		}
+	}
 }
 
 footer {
 	background-color: #333;
 	color: white;
 	.footer-wrapper-top {
+		h3 {
+			color: $secondary;
+		}
 		li+li {
 			padding-top: 8px;
+		}
+		.link-reservation a {
+			border: 3px solid $secondary;
 		}
 	}
 	.footer-wrapper-bottom {
