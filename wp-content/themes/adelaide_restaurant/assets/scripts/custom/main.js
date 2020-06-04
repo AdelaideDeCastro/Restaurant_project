@@ -30,5 +30,15 @@ jQuery( document ).ready( function () {
 		prevArrow:"<span class='icon slick-arrow-left' style='cursor:pointer;'><i class='fas fa-angle-left'></i></span>",
     	nextArrow:"<span class='icon slick-arrow-right' style='cursor:pointer;'><i class='fas fa-angle-right'></i></span>",
 	} );
+
+	/* datepicker */
+    $( '#datepicker_restaurant' ).datepicker( {
+    	dateFormat: 'dd-mm-yy',
+    	minDate: 0,
+    	buttonImage: "/Restaurant_project/wp-content/themes/adelaide_restaurant/img/calendar.png",
+    	showOn: "both",
+    	buttonImageOnly: true,
+    } );
 	
 });
+

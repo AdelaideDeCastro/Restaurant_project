@@ -1,16 +1,19 @@
 <?php
 
-$paged = ( get_query_var( 'paged' )) ? get_query_var( 'paged' ) : 1;
+$custom_query_args = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1;
 
 $args = [
-    'post_type'=> 'news',
-    'posts_per_page'=> '9',
-    'paged' => $paged,
+    'post_type'         => 'news', 
+    'posts_per_page'    => 9,
+    'paged'             => $custom_query_args,
 ];
 
-$news = null;
-
 $news = new WP_Query( $args );
+
+// Pagination fix
+$temp_query = $wp_query;
+$wp_query   = NULL;
+$wp_query   = $news;
 
 $counter = 1;
 
@@ -27,7 +30,7 @@ if ( $news->have_posts() ) : ?>
 
                 $excerpt = get_the_excerpt( $news->ID );
 
-                $short_excerpt = preg_match('/^([^.!?\s]*[\.!?\s]+){0,40}/', strip_tags($excerpt), $abstract );
+                $short_excerpt = preg_match('/^([^.!?\s]*[\.!?\s]+){0,40}/', strip_tags( $excerpt ), $abstract );
 
                 $short_excerpt = $abstract[0] . '[...]';
                 ?>
@@ -65,45 +68,40 @@ if ( $news->have_posts() ) : ?>
             $counter++;
 
             endwhile;
-
-            
-            ?>
-
-
-
-            
+            ?>  
 
         </div>
 
     </div>
+    <div class="pagination text-center">
 
+     <?php
 
-<div class="pagination text-center">
-    
-    <?php
-    echo get_previous_posts_link( '<span class="icon slick-arrow-left" style="cursor:pointer;vertical-align:sub;padding-left:6px;"><i class="fas fa-angle-left"></i></span>' );
+        if ( $news->max_num_pages > 1 ) {
 
-    echo paginate_links( array(
-            'total' => $news->max_num_pages,
-            'mid_size' => 2,
-            'prev_text'=> '',
-            'next_text' => '',
-    ));
-    echo get_next_posts_link( '<span class="icon slick-arrow-right" style="cursor:pointer;vertical-align:sub;padding-right:6px;"><i class="fas fa-angle-right"></i></span>', $news->max_num_pages );
-    ?> 
-    
-</div>
+            echo paginate_links( [
+                'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
+                'total'        => $news->max_num_pages,
+                'current'      => max( 1, get_query_var( 'paged' ) ),
+                'format'       => '?paged=%#%',
+                'show_all'     => false,
+                'type'         => 'plain',
+                'end_size'     => 2,
+                'mid_size'     => 1,
+                'prev_next'    => true,
+                'prev_text'    => sprintf( '<i></i> %1$s', __( 'Newer Posts', 'text-domain' ) ),
+                'next_text'    => sprintf( '%1$s <i></i>', __( 'Older Posts', 'text-domain' ) ),
+                'add_args'     => false,
+                'add_fragment' => '',
+            ] );
+           
+        }
+            
+        ?>
+        
+    </div>
 
-
-<div class="next-prev-wrap">
-
-
-
-</div>
-            <!-- <div class="pagination"><?= the_posts_pagination(); ?></div> -->
-
-            <?php
+<?php
 endif;
 
 wp_reset_postdata();
-?>

@@ -6,6 +6,7 @@
 // via node_modules super easy to update packages
 
 //@prepros-append ../../node_modules/jquery/dist/jquery.js
+//@prepros-append ../../node_modules/jquery-ui-dist/jquery-ui.js
 //@prepros-append ../../node_modules/slick-carousel/slick/slick.js
 //@prepros-append ../../node_modules/lightbox2/dist/js/lightbox.js
 //@prepros-append ../../node_modules/bootstrap/js/dist/util.js

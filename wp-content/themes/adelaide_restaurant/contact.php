@@ -24,4 +24,3 @@ get_footer();
 	}
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTkuOvYBBwNzYKsM6Ytbqv5w_WHBRq4R4&callback=initMap"></script>
-<script type="text/javascript" src="assets/js/main.min.js"></script>

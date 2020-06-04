@@ -7,20 +7,28 @@ if ( have_posts() ) :
 		<div class="container my-5">
 			<div class="row">
 				<div class="col-lg-7">
-					<article>
+					<article id="post-<?= the_ID(); ?>" class="<?= post_class(); ?>">
 						<h1 class="mb-3"><?= the_title(); ?></h1>
-						<div class="bg-img bg-img-home bg-img-fluid" style="background-image: url( ' <?= the_post_thumbnail_url( 'full' ); ?> ' );"></div>
+
+						<?php
+						if ( has_post_thumbnail() ) { ?>
+
+							<div class="bg-img bg-img-home bg-img-fluid" style="background-image: url( ' <?= the_post_thumbnail_url( 'full' ); ?> ' );"></div>
+
+						<?php } ?>
+
 						<p><?= the_date( 'd/m/Y' ); ?></p>
 						<?= the_content(); ?>
 					</article>
 				</div>
 				<div class="col-lg-5">
-					<div class="d-flex flex-wrap single-nieuws-img-wrapper">
 
-						<?php
-						$gallery = get_field( 'news_gallery' );
+					<?php
+					$gallery = get_field( 'news_gallery' );
 
-						if ( !empty( $gallery ) ) { ?>
+					if ( !empty( $gallery ) ) { ?>
+						
+						<div class="d-flex flex-wrap single-nieuws-img-wrapper">
 
 							<div class="gallery-overlay gallery-overlay-news d-flex flex-wrap w-100">
 								
@@ -32,8 +40,8 @@ if ( have_posts() ) :
 								<?php }	?>
 
 							</div>
-						
-						<?php } ?>
+					
+					<?php } ?>
 
 					</div>
 				</div>

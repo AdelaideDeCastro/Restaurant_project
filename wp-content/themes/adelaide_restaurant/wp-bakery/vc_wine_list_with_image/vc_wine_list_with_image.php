@@ -1,6 +1,6 @@
 <?php
 
-class vcWineListWithImage extends WPBakeryShortCode
+class vcWineListWithImage extends WPBakeryShortcode
 {
 	
 	//Initialize Component

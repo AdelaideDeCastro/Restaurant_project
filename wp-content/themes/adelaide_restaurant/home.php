@@ -1,6 +1,6 @@
 <?php
 /*
-* Template name: Archive
+* Template name: News archive
 */
 get_header();
 

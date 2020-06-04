@@ -1,5 +1,13 @@
-<?php get_header(); 
+<?php
+get_header();
 
-get_template_part( 'partials/content', 'page' );
+/*
+ * Include header image
+ */
+get_template_part('partials/page', 'image');
+/*
+ * Include default content
+ */
+get_template_part( 'partials/default', 'content' );
 
-get_footer(); 
+get_footer();

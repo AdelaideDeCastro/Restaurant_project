@@ -17,13 +17,7 @@
 
                 }
                 ?>
-                
-                <!-- <div class="col-lg-4">
-                    <h3>Reserveren</h3>
-                    <div class="link-reservatin mt-4">
-                        <a href="contact.html" class="text-secondary">Reserveren</a>
-                    </div>
-                </div> -->
+    
             </div>
         </div>
         <div class="footer-wrapper-bottom mt-5">
@@ -37,16 +31,16 @@
                 </ul>
                 <ul class="list-unstyled d-lg-flex justify-content-lg-end align-items-lg-center mb-0">
                     <li>
-                        <a href="https://www.thefork.nl/restaurant/bacco-perbacco/240697" target="_blank" class="text-white">
+                        <a href="<?= esc_attr( get_option( 'iens_handler' ) ); ?>" target="_blank" class="text-white">
                             Iens
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.tripadvisor.com/Restaurant_Review-g188633-d3294162-Reviews-Bacco_Perbacco_Cucina_Italiana-The_Hague_South_Holland_Province.html" target="_blank" class="text-white">
+                        <a href="<?= esc_attr( get_option( 'tripadvisor_handler' ) ); ?>" target="_blank" class="text-white">
                             <span class="icon"><i class="fab fa-tripadvisor"></i></span></a>
                     </li>
                     <li>
-                        <a href="https://www.facebook.com/ristorante.baccoperbacco" target="_blank" class="text-white">
+                        <a href="<?= esc_attr( get_option( 'facebook_handler' ) ); ?>" target="_blank" class="text-white">
                             <span class="icon"><i class="fab fa-facebook-f"></i></span></a>
                     </li>
                 </ul>
