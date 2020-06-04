@@ -8087,6 +8087,22 @@ a.text-black:hover, a.text-black:focus {
   color: #631a2d;
   font-size: 1.875em; }
 
+.page-numbers i {
+  font-size: 1em;
+  vertical-align: middle; }
+
+.ui-datepicker-trigger {
+  position: absolute;
+  bottom: 13px;
+  right: 22px;
+  width: 16px; }
+
+.ui-icon-circle-triangle-e:before {
+  content: ">"; }
+
+.ui-icon-circle-triangle-w:before {
+  content: "<"; }
+
 header {
   top: 0;
   overflow: hidden;

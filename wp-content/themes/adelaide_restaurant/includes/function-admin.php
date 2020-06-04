@@ -45,7 +45,7 @@ function restaurant_custom_settings()
 
 function restaurant_contact_email()
 {
-	echo "PIPPO";
+	
 }
 
 //Create HTML fields to Admin page

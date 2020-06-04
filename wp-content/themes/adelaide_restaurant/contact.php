@@ -2,7 +2,7 @@
 /*
 * Template Name: Contact template
 */
-get_header(); ?>
+get_header();?>
 
 <div id="bacco_map" style="height: 400px"></div>
 

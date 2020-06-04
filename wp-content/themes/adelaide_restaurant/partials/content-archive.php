@@ -10,11 +10,6 @@ $args = [
 
 $news = new WP_Query( $args );
 
-// Pagination fix
-$temp_query = $wp_query;
-$wp_query   = NULL;
-$wp_query   = $news;
-
 $counter = 1;
 
 if ( $news->have_posts() ) : ?>
@@ -73,35 +68,38 @@ if ( $news->have_posts() ) : ?>
         </div>
 
     </div>
-    <div class="pagination text-center">
 
-     <?php
+    <?php
+    if ( $news->max_num_pages > 1 ) { ?>
 
-        if ( $news->max_num_pages > 1 ) {
+        <div class="pagination text-center">
 
-            echo paginate_links( [
-                'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
-                'total'        => $news->max_num_pages,
-                'current'      => max( 1, get_query_var( 'paged' ) ),
+            <?php
+            $big = 999999999;
+
+            echo paginate_links( array(
+                'base'         => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
                 'format'       => '?paged=%#%',
+                'current'      => max( 1, get_query_var( 'paged' ) ),
+                'total'        => $news->max_num_pages,
                 'show_all'     => false,
                 'type'         => 'plain',
                 'end_size'     => 2,
                 'mid_size'     => 1,
                 'prev_next'    => true,
-                'prev_text'    => sprintf( '<i></i> %1$s', __( 'Newer Posts', 'text-domain' ) ),
-                'next_text'    => sprintf( '%1$s <i></i>', __( 'Older Posts', 'text-domain' ) ),
+                'prev_text'    => sprintf( '<i class="fas fa-angle-left"></i> %1$s', __( '', 'text-domain' ) ),
+                'next_text'    => sprintf( '%1$s <i class="fas fa-angle-right"></i>', __( '', 'text-domain' ) ),
                 'add_args'     => false,
                 'add_fragment' => '',
-            ] );
-           
-        }
-            
-        ?>
-        
-    </div>
+            ) );
+           ?>
 
-<?php
+        </div>
+
+    <?php
+    }
+                    
 endif;
 
 wp_reset_postdata();
+?>

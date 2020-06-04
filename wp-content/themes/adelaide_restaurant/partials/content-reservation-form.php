@@ -1,39 +1,8 @@
 <?php 
 session_start();
-
-$reservationEmail = esc_attr( get_option( 'reservation_email' ) );
-
-if( isset( $_POST[ 'submit' ] ) ) {
-
-	$to = $reservationEmail; // this is your Email address
-    $from = $_POST['email']; // this is the sender's Email address
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $subject = "Reservation submission";
-    $subject2 = "Copy of your Reservation submission";
-    $message = "Booked by: " . $first_name . " " . $last_name . "\n\n" . "Telephone: " . $_POST[ 'phone' ] . "Email address: " . $_POST[ 'email' ] . "\n\n" . "Date: " . $_POST[ 'reservatio_date' ] . " at: " . $_POST[ 'hour' ] . "hours" . "\n\n" . $_POST['message'];
-    $message2 = "Here is a copy of your message " . $first_name . "\n\n" . $_POST['message'];
-
-    $headers = "From:" . $from;
-    $headers2 = "From:" . $to;
-    wp_mail( $to, $subject, $message, $headers );
-    wp_mail( $from, $subject2, $message2, $headers2 ); // sends a copy of the message to the sender
-    echo "Mail Sent. Thank you " . $first_name . " " . $last_name . ", we will contact you shortly.";
-    // You can also use header('Location: thank_you.php'); to redirect to another page.
-}
-
-if ( !empty( $_POST ) ) { ?>
-	
-	<div class="thanks-wrapper">
-		<h1><?php echo $_SESSION[ 'thanks_title' ]; ?></h1>
-		<p><?php echo $_SESSION[ 'thanks_content' ]; ?></p>
-	</div>
-
-<?php	
-}
 ?>
 
-<form action="content-reservation-form.php" method="post">
+<form action="<?php echo get_stylesheet_directory_uri(); ?>/partials/contactform.php" method="post">
 	<div class="form-row">
 		<div class="form-group col-lg-6">
 			<input type="text" class="form-control" name="first_name" value="<?php if( isset($_POST[ 'first_name' ] ) ) { echo $_POST[ 'first_name' ]; } ?>" placeholder="Voornaam" required="">
@@ -47,8 +16,7 @@ if ( !empty( $_POST ) ) { ?>
 			<input type="number" class="form-control" name="phone" value="<?php if( isset($_POST[ 'phone' ] ) ) { echo $_POST[ 'phone' ]; } ?>" placeholder="Telefoon" required="">
 		</div>
 		<div class="form-group col-lg-6">
-			<input type="email" class="form-control" name="email" value="<?php if( isset($_POST[ 'email' ] ) ) { echo $_POST[ 'email' ]; } ?>" pattern="/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}
-  [a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/" placeholder="E-mailadres" required>
+			<input type="email" class="form-control" name="email" value="<?php if( isset($_POST[ 'email' ] ) ) { echo $_POST[ 'email' ]; } ?>" pattern="/^(?!(?:(?:\\x22?\\x5C[\\x00-\\x7E]\\x22?)|(?:\\x22?[^\\x5C\\x22]\\x22?)){255,})(?!(?:(?:\\x22?\\x5C[\\x00-\\x7E]\\x22?)|(?:\\x22?[^\\x5C\\x22]\\x22?)){65,}@)(?:(?:[\\x21\\x23-\\x27\\x2A\\x2B\\x2D\\x2F-\\x39\\x3D\\x3F\\x5E-\\x7E]+)|(?:\\x22(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x1F\\x21\\x23-\\x5B\\x5D-\\x7F]|(?:\\x5C[\\x00-\\x7F]))*\\x22))(?:\\.(?:(?:[\\x21\\x23-\\x27\\x2A\\x2B\\x2D\\x2F-\\x39\\x3D\\x3F\\x5E-\\x7E]+)|(?:\\x22(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x1F\\x21\\x23-\\x5B\\x5D-\\x7F]|(?:\\x5C[\\x00-\\x7F]))*\\x22)))*@(?:(?:(?!.*[^.]{64,})(?:(?:(?:xn--)?[a-z0-9]+(?:-+[a-z0-9]+)*\\.){1,126}){1,}(?:(?:[a-z][a-z0-9]*)|(?:(?:xn--)[a-z0-9]+))(?:-+[a-z0-9]+)*)|(?:\\[(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){7})|(?:(?!(?:.*[a-f0-9][:\\]]){7,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?)))|(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){5}:)|(?:(?!(?:.*[a-f0-9]:){5,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3}:)?)))?(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))(?:\\.(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))){3}))\\]))$/iD" placeholder="E-mailadres" required>
 		</div>
 	</div>
 	<div class="form-row">
@@ -56,34 +24,15 @@ if ( !empty( $_POST ) ) { ?>
 			<input type="text" class="form-control" id="datepicker_restaurant" name="reservatio_date" value="<?php if( isset($_POST[ 'reservatio_date' ] ) ) { echo $_POST[ 'reservatio_date' ]; } ?>" placeholder="Datum" required="">
 		</div>
 		<div class="form-group col-lg-4">
-			<input type="time" class="form-control" name="hour" value="<?php if( isset($_POST[ 'hour' ] ) ) { echo $_POST[ 'hour' ]; } ?>" placeholder="Uur" required="">
+			<input type="time" class="form-control" name="hour" value="<?php if( isset($_POST[ 'hour' ] ) ) { echo $_POST[ 'hour' ]; } ?>" placeholder="hour" required="">
 		</div>
 		<div class="form-group col-lg-4">
-			<input type="number" class="form-control" name="people" value="<?php if( isset($_POST[ 'people' ] ) ) { echo $_POST[ 'people' ]; } ?>" min="0" max="33" placeholder="Personen" required="">
+			<input type="number" class="form-control" name="people" value="<?php if( isset($_POST[ 'people' ] ) ) { echo $_POST[ 'people' ]; } ?>" min="1" max="33" placeholder="People" required="">
 		</div>
 		<textarea class="form-control" name="message" value="<?php if( isset($_POST[ 'message' ] ) ) { echo $_POST[ 'message' ]; } ?>" rows="10" cols="30" placeholder="Eventuele opmerking waarmee wij rekeningen kunnen houden"></textarea>
 	</div>
-	<div>
-		
-		<button class="g-recaptcha" 
-        data-sitekey="reCAPTCHA_site_key" 
-        data-callback='onSubmit' 
-        data-action='submit'>Submit</button>
-	</div>
-	<button type="submit" class="btn btn-outline-primary" name="submit" value="<?php if( isset($_POST[ 'submit' ] ) ) { echo $_POST[ 'submit' ]; } ?>"><?php echo $_SESSION[ 'submit_title' ]; ?></button>
+<button type="submit" class="btn btn-outline-primary" name="submit" value="<?php if( isset($_POST[ 'submit' ] ) ) { echo $_POST[ 'submit' ]; } ?>"><?php echo $_SESSION[ 'submit_title' ]; ?></button> 
 </form>
-
-<script src="https://www.google.com/recaptcha/api.js?render=reCAPTCHA_site_key"></script>
-<script>
-  function onClick(e) {
-    e.preventDefault();
-    grecaptcha.ready(function() {
-      grecaptcha.execute('reCAPTCHA_site_key', {action: 'submit'}).then(function(token) {
-          // Add your logic to submit to your backend server here.
-      });
-    });
-  }
-</script>
 
 
 
