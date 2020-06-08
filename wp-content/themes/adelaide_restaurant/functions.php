@@ -32,11 +32,11 @@ function remove_jquery_migrate( $scripts ) {
 add_action( 'wp_default_scripts', 'remove_jquery_migrate' );
 
 
-function mg_news_pagination_rewrite() {
-  add_rewrite_rule('restaurant_project/news/page/?([0-9])', 'home.php?pagename=news&paged=$matches[1]', 'top');
-	// flush_rewrite_rules( false );
-}
+// function mg_news_pagination_rewrite() {
+//   add_rewrite_rule('restaurant_project/news/page/?([0-9])', 'home.php?pagename=news&paged=$matches[1]', 'top');
+// 	// flush_rewrite_rules( false );
+// }
 
-add_action('init', 'mg_news_pagination_rewrite');
+// add_action('init', 'mg_news_pagination_rewrite');
 
 

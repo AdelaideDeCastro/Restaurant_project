@@ -1,13 +1,17 @@
 <?php 
-$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+$paged = (get_query_var('page')) ? get_query_var('page') : 1;
 
 $args = [
-'post_type'         => 'last_news', 
-'posts_per_page'    => 9,
-'paged'             => $paged,
+    'post_type'         => 'last_news', 
+    'posts_per_page'    => 9,
+    'paged'             => $paged,
 ];
 
+var_dump( $paged ); // i'm not on this page, see that? for some reason i'm on another page
+
 $wp_query = new WP_Query( $args );
+
+// allright i'm sure i'm on the right page/template
 
 $counter = 1;
 ?>
@@ -57,10 +61,19 @@ $counter = 1;
 
         <?php
             $counter++;
+
+  $total_pages = $wp_query->max_num_pages;
+    $big = 999999999;
+    echo paginate_links( array(
+            'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+            'format' => '/page/%#%',
+            'current' => $paged,
+            'total' => $total_pages,
+            'prev_text' => 'Vorige',
+            'next_text' => 'Volgende'
+        ));
+
         endwhile; ?>
 
     </div>
 </div>
-
-<?php previous_posts_link('&laquo; Newer') ?>
-<?php next_posts_link('Older &raquo;') ?>

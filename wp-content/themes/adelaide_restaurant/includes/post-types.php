@@ -21,6 +21,9 @@ function restaurant_register_post_types() {
 		'supports'            	=> [ 'title', 'thumbnail', 'editor' ],
 	] );
 
+
+	// dammit i forget to save the file every time haha
+
 	//Post type News
 	register_post_type( 'last_news', [
 		'labels'				=> [
@@ -37,7 +40,7 @@ function restaurant_register_post_types() {
 		'show_in_menu'			=> true,
 		'show_in_nav_menus'		=> false,
 		'exclude_from_search'	=> false,
-		// 'rewrite'				=> [ 'with_front' => true ],
+		'rewrite'				=> [ 'with_front' => true ],
 		'supports'            	=> [ 'title', 'thumbnail', 'editor' ],
 	] );
 }
