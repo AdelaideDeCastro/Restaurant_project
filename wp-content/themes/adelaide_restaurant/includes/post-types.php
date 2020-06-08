@@ -22,7 +22,7 @@ function restaurant_register_post_types() {
 	] );
 
 	//Post type News
-	register_post_type( 'news', [
+	register_post_type( 'last_news', [
 		'labels'				=> [
 			'name'			=> __( 'News', 'restaurant_project' ),
 			'singular_name'	=> __( 'News', 'restaurant_project' ),
@@ -37,7 +37,7 @@ function restaurant_register_post_types() {
 		'show_in_menu'			=> true,
 		'show_in_nav_menus'		=> false,
 		'exclude_from_search'	=> false,
-		'rewrite'				=> [ 'with_front' => true ],
+		// 'rewrite'				=> [ 'with_front' => true ],
 		'supports'            	=> [ 'title', 'thumbnail', 'editor' ],
 	] );
 }

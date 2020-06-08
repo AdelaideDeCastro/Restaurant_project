@@ -8073,6 +8073,9 @@ a.text-black:hover, a.text-black:focus {
 .fa-times:before {
   content: "\f00d"; }
 
+.fa-copyright:before {
+  content: "\f1f9"; }
+
 .link-reservation a {
   border: 0.188rem solid #efe7de;
   font-size: 1.4rem;
@@ -8233,6 +8236,8 @@ footer {
     margin-left: 1em; }
     footer .footer-wrapper-bottom ul li + li i {
       font-size: 22px; }
+      footer .footer-wrapper-bottom ul li + li i.fa-copyright {
+        font-size: 1em; }
 
 @media (max-width: 991.98px) {
   .surrounded-img .border-around-img.border-around-img-sm {

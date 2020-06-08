@@ -24,8 +24,9 @@
             <div class="d-flex">
                 <ul class="list-unstyled d-lg-flex  justify-content-lg-start align-items-lg-center mr-auto mb-0">
                     <li>Adelaide De Castro</li>
-                    <li>Copyright</li>
-                    <li>|
+                    <li><i class="far fa-copyright"></i> Copyright</li>
+                    <li>|</li>
+                    <li>
                         <a href="#" target="_blank" class="text-white">Privacy</a>
                     </li>
                 </ul>

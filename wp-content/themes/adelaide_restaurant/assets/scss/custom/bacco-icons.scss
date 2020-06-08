@@ -11,6 +11,7 @@ $used-icons: (
         angle-down: $fa-var-angle-down,
         map-marker-alt: $fa-var-map-marker-alt,
         times: $fa-var-times,
+        copyright: $fa-var-copyright,
 );
 
 @each $name, $content in $used-icons {

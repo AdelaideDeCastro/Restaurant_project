@@ -49,4 +49,11 @@ if ( ! function_exists('restaurant_theme_setup') ) {
 
     add_action( 'widgets_init', 'restaurant_register_widgets' );
 
+    //Languages
+    add_action( 'after_setup_theme', 'my_theme_setup_languages' );
+
+    function my_theme_setup_languages(){
+        load_theme_textdomain( 'Restaurant_project' );
+    }
+
 }
